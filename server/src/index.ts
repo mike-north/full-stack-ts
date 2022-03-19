@@ -4,7 +4,6 @@ import { DB_FILE_PATH, PORT, STATIC_ROOT_FOLDER_PATH } from './constants';
 import { seedDb } from './seed';
 import express from 'express';
 
-
 const app = express();
 
 async function main() {
@@ -15,11 +14,10 @@ async function main() {
     seedDb(db);
   }
 
-
-  app.use('/static',express.static(STATIC_ROOT_FOLDER_PATH));
-  app.listen(PORT,() => {
+  app.use('/static', express.static(STATIC_ROOT_FOLDER_PATH));
+  app.listen(PORT, () => {
     console.log(`API Listening on http://localhost:${PORT}`);
-  })
+  });
 }
 
 main();

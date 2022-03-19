@@ -1,4 +1,4 @@
-import Db from "./db";
+import Db from './db';
 
 export function seedDb(db: Db) {
   const me = db.createUser({
@@ -16,6 +16,6 @@ export function seedDb(db: Db) {
         message: "Hello world! I'm another tweet!",
       }),
     ];
-    console.log('created first tweets', firstTweets)
+    console.log('created first tweets', firstTweets);
   }
 }
