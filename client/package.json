@@ -1,0 +1,14 @@
+{
+  "name": "@full-stack-ts/client",
+  "version": "0.0.0",
+  "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
+  "license": "NOLICENSE",
+  "private": true,
+  "scripts": {
+    "dev": "yarn parcel src/index.html",
+    "build": "yarn parcel build  --dist-dir dist src/index.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.3.2"
+  }
+}

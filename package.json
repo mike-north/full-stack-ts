@@ -1,0 +1,22 @@
+{
+  "name": "full-stack-ts",
+  "version": "0.0.0",
+  "description": "Mike North's Full Stack TypeScript course",
+  "main": "dist/index.js",
+  "repository": "https://github.com/mike-north/full-stack-ts",
+  "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
+  "license": "NOLICENSE",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ],
+  "devDependencies": {
+    "prettier": "^2.6.0"
+  },
+  "volta": {
+    "node": "16.14.2",
+    "yarn": "1.22.18"
+  }
+}

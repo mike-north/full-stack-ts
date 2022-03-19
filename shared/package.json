@@ -1,0 +1,8 @@
+{
+  "name": "@full-stack-ts/shared",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
+  "license": "NOLICENSE",
+  "private": true
+}
