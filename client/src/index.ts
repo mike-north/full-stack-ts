@@ -1,7 +1,6 @@
-import { sub } from "@full-stack-ts/shared";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import App from './App';
 
-export function add(a: number, b: number, c: number = 0): number {
-  return a + b + c;
-}
-
-document.querySelector('#answer')!.innerHTML = `${add(3, sub(12, 3))}`;
+const app = document.getElementById('app');
+ReactDOM.render(React.createElement(App, { }, null), app);

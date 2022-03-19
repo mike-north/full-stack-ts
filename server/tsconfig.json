@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "module": "ESNext",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src"]
 }

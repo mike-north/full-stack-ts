@@ -1,0 +1,27 @@
+{
+  "tweets": [
+    {
+      "userId": "user-1",
+      "message": "Hello world! I'm a tweet!",
+      "createdAt": "2022-03-19T21:08:02.323Z",
+      "updatedAt": "2022-03-19T21:08:02.323Z",
+      "id": "tweet-1"
+    },
+    {
+      "userId": "user-1",
+      "message": "Hello world! I'm another tweet!",
+      "createdAt": "2022-03-19T21:08:02.323Z",
+      "updatedAt": "2022-03-19T21:08:02.323Z",
+      "id": "tweet-2"
+    }
+  ],
+  "users": [
+    {
+      "name": "Mike North",
+      "handle": "michaellnorth",
+      "createdAt": "2022-03-19T21:08:02.322Z",
+      "updatedAt": "2022-03-19T21:08:02.322Z",
+      "id": "user-1"
+    }
+  ]
+}

@@ -5,5 +5,5 @@
     "js": "node --experimental-specifier-resolution=node"
   },
   "watch": ["dist", "../shared/dist"],
-  "ext": "ts,js,json"
+  "ext": "ts,js,json,html"
 }
