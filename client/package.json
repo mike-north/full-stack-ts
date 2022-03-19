@@ -8,6 +8,9 @@
     "dev": "yarn parcel src/index.html",
     "build": "yarn parcel build  --dist-dir dist src/index.html"
   },
+  "dependencies": {
+    "@full-stack-ts/shared": "^0.0.0"
+  },
   "devDependencies": {
     "parcel": "^2.3.2"
   }

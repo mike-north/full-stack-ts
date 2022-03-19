@@ -4,6 +4,6 @@
   "execMap": {
     "js": "node --experimental-specifier-resolution=node"
   },
-  "watch": ["dist"],
+  "watch": ["dist", "../shared/dist"],
   "ext": "ts,js,json"
 }

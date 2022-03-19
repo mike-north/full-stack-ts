@@ -1,5 +1,7 @@
+import { sub } from "@full-stack-ts/shared";
+
 export function add(a: number, b: number, c: number = 0): number {
-  return a + b + c+100;
+  return a + b + c;
 }
 
-document.querySelector('#answer')!.innerHTML = `${add(3, 119)}`;
+document.querySelector('#answer')!.innerHTML = `${add(3, sub(12, 3))}`;
