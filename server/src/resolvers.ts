@@ -60,10 +60,11 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
         });
       },
       statistics(user) {
+        const dbTweets = db.getUserTweets(user.id);
         return {
           user,
           followerCount: 88,
-          tweetCount: 66,
+          tweetCount: dbTweets.length,
           followingCount: 77,
         };
       },
@@ -116,7 +117,6 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
       },
       author(tweet, _args, context) {
         const { dbTweetMap } = context;
-        console.log({ context });
         if (!dbTweetMap)
           throw new Error(
             'Tweet.author resolver expected dbTweetMap to be populated, and it was found to be missing'

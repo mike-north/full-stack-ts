@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-const URL_REGEXP = /(https?:\/\/[\w./&?\-_]+)|(\n)/g;
+const URL_REGEXP = /(https?:\/\/[\w./&?\-_0-9]+)|(\n)/g;
 const YOUTUBE_URL_REGEXP = /https:\/\/www.youtube.com[\w./&?\-_]+/g;
-const IMAGE_URL_REGEXP = /https?:\/\/[\w./&?\-_]+.(jpg|jpeg|gif|png)/g;
+const IMAGE_URL_REGEXP = /https?:\/\/[\w./&?\-_0-9]+.(jpg|jpeg|gif|png)/g;
 
 const TweetMessage: React.FC<{ message: string }> = ({ message }) => {
   const parts = message.split(URL_REGEXP).filter(Boolean);

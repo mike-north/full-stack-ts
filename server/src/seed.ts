@@ -6,19 +6,19 @@ export function seedDb(db: Db) {
       db.createUser({
         name: 'Mike North',
         handle: 'michaellnorth',
-        avatarUrl: 'http://placecorgi.com/300/300',
+        avatarUrl: 'http://placecorgi.com/300/300.jpg',
       }),
       db.createUser({
         name: 'Lisa Huang-North',
         handle: 'LisaHuangNorth',
-        avatarUrl: 'http://placecorgi.com/600/600',
+        avatarUrl: 'http://placecorgi.com/600/600.jpg',
       }),
     ];
 
     const [tweet1, tweet2, tweet3, tweet4] = [
       db.createTweet({
         userId: firstUser.id,
-        message: "Hello world! I'm a tweet!",
+        message: "Hey, check this out! https://www.youtube.com/embed/Q1owo3t6CZ8",
       }),
       db.createTweet({
         userId: firstUser.id,
@@ -26,11 +26,11 @@ export function seedDb(db: Db) {
       }),
       db.createTweet({
         userId: secondUser.id,
-        message: 'I like corgies http://placecorgi.com/800/600',
+        message: 'I like corgies http://placecorgi.com/800/600.jpg',
       }),
       db.createTweet({
         userId: secondUser.id,
-        message: 'I REALLY like corgies http://placecorgi.com/800/600',
+        message: 'I REALLY like corgies http://placecorgi.com/700/600.jpg',
       }),
     ];
     db.createFavorite({ userId: firstUser.id, tweetId: tweet1.id });

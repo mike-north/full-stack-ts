@@ -1,51 +1,73 @@
+import gql from 'graphql-tag';
 import * as React from 'react';
 import ComposePanel from './ComposePanel';
 import Tweet from './Tweet';
+import { useGetTimelineTweetsQuery } from './generated/graphql';
 
-const Timeline: React.FC = () => (
-  <div id="timeline">
-    <ComposePanel />
-    <Tweet
-      author={{name: 'Bob Ross', handle: 'BobRoss', avatarUrl: "https://yt3.ggpht.com/-uJh4oSQAwak/AAAAAAAAAAI/AAAAAAAAAAA/AMGKfKvDP3w/s900-c-k-no-mo-rj-c0xffffff/photo.jpg"}}
-      commentCount={17031}
-      likeCount={37891}
-      retweetCount={7879}
-      createdAt={new Date('2022-03-19T23:11:32.960Z')}
-      message={`Just posting some of my work. https://images.fineartamerica.com/images-medium-large-5/autumns-glow-c-steele.jpg`}
-    />
-    <Tweet
-      author={{name: 'Ian | Gibbu', handle: 'Gibbu_', avatarUrl: "https://yt3.ggpht.com/-uJh4oSQAwak/AAAAAAAAAAI/AAAAAAAAAAA/AMGKfKvDP3w/s900-c-k-no-mo-rj-c0xffffff/photo.jpg"}}
-      commentCount={17031}
-      likeCount={37891}
-      retweetCount={7879}
-      createdAt={new Date('2022-03-19T21:01:32.960Z')}
-      message={`This is my third attempt ona redesign for Twitter.
-      Typing anything into the search input will display "YouTube"
-      results.
-      You can also press "More" &gt; "Display" to customize Twitter.`}
-    />
-    <Tweet
-      author={{name: 'Albus Dumbledore', handle: 'albusdumb', avatarUrl: "https://www.thesun.co.uk/wp-content/uploads/2016/04/2129070.main_image.jpg?w=620&strip=all"}}
-      commentCount={17031}
-      likeCount={37891}
-      retweetCount={7879}
-      createdAt={new Date('2022-03-19T23:01:32.960Z')}
-      message={'Very impressive work by this young fellow. https://www.youtube.com/embed/MvjQTA81MhY'}
-    />
-    <Tweet
-      author={{name: 'Will Smith', handle: 'WillSmith', avatarUrl: "https://static0.therichestimages.com/wp-content/uploads/Will-Smith.jpeg"}}
-      commentCount={17031}
-      likeCount={37891}
-      retweetCount={7879}
-      createdAt={new Date('2022-03-19T20:01:32.960Z')}
-      message={'Still one of my favourite movies. https://www.youtube.com/embed/aoyV49FfjOU'}
-    />
+export const GET_TIMELINE_TWEETS = gql`
+  query GetTimelineTweets {
+    tweets {
+      id
+      body
+      favoriteCount
+      retweetCount
+      commentCount
+      createdAt
+      favorites {
+        user {
+          id
+        }
+      }
+      author {
+        name
+        handle
+        avatarUrl
+      }
+    }
+  }
+`;
 
-    <footer>
-      <i className="fab fa-twitter"></i>
-      <button>Load More</button>
-    </footer>
-  </div>
-);
+export interface TimelineProps {
+  currentUserFavorites: string[]
+}
+
+const Timeline: React.FC<TimelineProps> = ({ currentUserFavorites }) => {
+  const { loading, error, data } = useGetTimelineTweetsQuery();
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!data) return <p>No data!</p>;
+  const { tweets } = data;
+  if (!tweets) return <p>No tweets!</p>;
+  console.log({ currentUserFavorites})
+  return (
+    <div id="timeline">
+      <ComposePanel />
+      {tweets.map((t) => {
+        const author = t.author;
+        if (!author) throw new Error(`Tweet ${t.id} has no author!`);
+        const isFavorited = currentUserFavorites.includes(t.id)
+        console.log({ isFavorited, id: t.id, body: t.body })
+        return (
+          <Tweet
+            key={t.id}
+            isFavorited={isFavorited}
+            author={author}
+            commentCount={t.commentCount || -1}
+            likeCount={t.favoriteCount || -1}
+            retweetCount={t.retweetCount || -1}
+            createdAt={new Date(t.createdAt)}
+            message={t.body}
+          />
+        );
+      })}
+
+
+      <footer>
+        <i className="fab fa-twitter"></i>
+        <button>Load More</button>
+      </footer>
+    </div>
+  );
+};
 
 export default Timeline;

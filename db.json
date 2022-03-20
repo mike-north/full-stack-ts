@@ -1,87 +1,87 @@
 {
   "tweets": [
     {
-      "userId": "user-3ddc5ed4-7147-4c26-a2d6-cf88886cb0a9",
-      "message": "Hello world! I'm a tweet!",
-      "createdAt": "2022-03-20T17:42:18.827Z",
-      "updatedAt": "2022-03-20T17:42:18.827Z",
-      "id": "tweet-2b4c5012-71ec-4c9c-8728-9d4445fe13ea"
+      "userId": "user-91aa3790-51ea-48fe-85b3-f3ccb025beac",
+      "message": "Hey, check this out! https://www.youtube.com/embed/Q1owo3t6CZ8",
+      "createdAt": "2022-03-20T18:56:59.144Z",
+      "updatedAt": "2022-03-20T18:56:59.144Z",
+      "id": "tweet-bbccb3cd-b733-417b-a149-cb8d1a8953dd"
     },
     {
-      "userId": "user-3ddc5ed4-7147-4c26-a2d6-cf88886cb0a9",
+      "userId": "user-91aa3790-51ea-48fe-85b3-f3ccb025beac",
       "message": "Hello world! I'm another tweet!",
-      "createdAt": "2022-03-20T17:42:18.827Z",
-      "updatedAt": "2022-03-20T17:42:18.827Z",
-      "id": "tweet-c2b57a7e-956a-4ce6-a112-7564defce2c1"
+      "createdAt": "2022-03-20T18:56:59.144Z",
+      "updatedAt": "2022-03-20T18:56:59.144Z",
+      "id": "tweet-b3aafbb9-ece2-45db-8c24-d69a5c2422d9"
     },
     {
-      "userId": "user-742a6332-2c47-41cc-a9fe-24a24b9086ad",
-      "message": "I like corgies http://placecorgi.com/800/600",
-      "createdAt": "2022-03-20T17:42:18.827Z",
-      "updatedAt": "2022-03-20T17:42:18.827Z",
-      "id": "tweet-7ba92bf8-6204-4d28-97be-d77e99107368"
+      "userId": "user-c8e81822-c8ee-49f1-bddd-a0df5e87d8d6",
+      "message": "I like corgies http://placecorgi.com/800/600.jpg",
+      "createdAt": "2022-03-20T18:56:59.144Z",
+      "updatedAt": "2022-03-20T18:56:59.144Z",
+      "id": "tweet-15e03cea-6e42-453e-aea9-0f2a2d99a23d"
     },
     {
-      "userId": "user-742a6332-2c47-41cc-a9fe-24a24b9086ad",
-      "message": "I REALLY like corgies http://placecorgi.com/800/600",
-      "createdAt": "2022-03-20T17:42:18.827Z",
-      "updatedAt": "2022-03-20T17:42:18.827Z",
-      "id": "tweet-bca93316-3c44-489c-9ba9-6804f14a99d7"
+      "userId": "user-c8e81822-c8ee-49f1-bddd-a0df5e87d8d6",
+      "message": "I REALLY like corgies http://placecorgi.com/700/600.jpg",
+      "createdAt": "2022-03-20T18:56:59.144Z",
+      "updatedAt": "2022-03-20T18:56:59.144Z",
+      "id": "tweet-194faee6-37ca-4379-84f0-a767e2a426de"
     }
   ],
   "users": [
     {
       "name": "Mike North",
       "handle": "michaellnorth",
-      "avatarUrl": "http://placecorgi.com/300/300",
-      "createdAt": "2022-03-20T17:42:18.826Z",
-      "updatedAt": "2022-03-20T17:42:18.826Z",
-      "id": "user-3ddc5ed4-7147-4c26-a2d6-cf88886cb0a9"
+      "avatarUrl": "http://placecorgi.com/300/300.jpg",
+      "createdAt": "2022-03-20T18:56:59.143Z",
+      "updatedAt": "2022-03-20T18:56:59.143Z",
+      "id": "user-91aa3790-51ea-48fe-85b3-f3ccb025beac"
     },
     {
       "name": "Lisa Huang-North",
       "handle": "LisaHuangNorth",
-      "avatarUrl": "http://placecorgi.com/600/600",
-      "createdAt": "2022-03-20T17:42:18.826Z",
-      "updatedAt": "2022-03-20T17:42:18.826Z",
-      "id": "user-742a6332-2c47-41cc-a9fe-24a24b9086ad"
+      "avatarUrl": "http://placecorgi.com/600/600.jpg",
+      "createdAt": "2022-03-20T18:56:59.143Z",
+      "updatedAt": "2022-03-20T18:56:59.143Z",
+      "id": "user-c8e81822-c8ee-49f1-bddd-a0df5e87d8d6"
     }
   ],
   "favorites": [
     {
-      "userId": "user-3ddc5ed4-7147-4c26-a2d6-cf88886cb0a9",
-      "tweetId": "tweet-2b4c5012-71ec-4c9c-8728-9d4445fe13ea",
-      "createdAt": "2022-03-20T17:42:18.828Z",
-      "updatedAt": "2022-03-20T17:42:18.828Z",
-      "id": "favorite-bed358c2-88d5-4911-81fd-7a05c1fbe3cc"
+      "userId": "user-91aa3790-51ea-48fe-85b3-f3ccb025beac",
+      "tweetId": "tweet-bbccb3cd-b733-417b-a149-cb8d1a8953dd",
+      "createdAt": "2022-03-20T18:56:59.145Z",
+      "updatedAt": "2022-03-20T18:56:59.145Z",
+      "id": "favorite-c61c894d-fbae-46e2-9032-26fd45ae7d17"
     },
     {
-      "userId": "user-3ddc5ed4-7147-4c26-a2d6-cf88886cb0a9",
-      "tweetId": "tweet-7ba92bf8-6204-4d28-97be-d77e99107368",
-      "createdAt": "2022-03-20T17:42:18.829Z",
-      "updatedAt": "2022-03-20T17:42:18.829Z",
-      "id": "favorite-90b5f43a-ebb0-46e0-bd5d-09f09fff572c"
+      "userId": "user-91aa3790-51ea-48fe-85b3-f3ccb025beac",
+      "tweetId": "tweet-15e03cea-6e42-453e-aea9-0f2a2d99a23d",
+      "createdAt": "2022-03-20T18:56:59.145Z",
+      "updatedAt": "2022-03-20T18:56:59.145Z",
+      "id": "favorite-20cbd9b3-f373-418b-9545-822f35860e93"
     },
     {
-      "userId": "user-3ddc5ed4-7147-4c26-a2d6-cf88886cb0a9",
-      "tweetId": "tweet-bca93316-3c44-489c-9ba9-6804f14a99d7",
-      "createdAt": "2022-03-20T17:42:18.829Z",
-      "updatedAt": "2022-03-20T17:42:18.829Z",
-      "id": "favorite-69f25c35-f197-4193-8593-13b880376e9f"
+      "userId": "user-91aa3790-51ea-48fe-85b3-f3ccb025beac",
+      "tweetId": "tweet-194faee6-37ca-4379-84f0-a767e2a426de",
+      "createdAt": "2022-03-20T18:56:59.146Z",
+      "updatedAt": "2022-03-20T18:56:59.146Z",
+      "id": "favorite-3c6319fd-436c-43df-a948-d9184df81b00"
     },
     {
-      "userId": "user-742a6332-2c47-41cc-a9fe-24a24b9086ad",
-      "tweetId": "tweet-c2b57a7e-956a-4ce6-a112-7564defce2c1",
-      "createdAt": "2022-03-20T17:42:18.829Z",
-      "updatedAt": "2022-03-20T17:42:18.829Z",
-      "id": "favorite-1755117d-4b5b-4e5e-b471-4bd7fee4d9f7"
+      "userId": "user-c8e81822-c8ee-49f1-bddd-a0df5e87d8d6",
+      "tweetId": "tweet-b3aafbb9-ece2-45db-8c24-d69a5c2422d9",
+      "createdAt": "2022-03-20T18:56:59.146Z",
+      "updatedAt": "2022-03-20T18:56:59.146Z",
+      "id": "favorite-a272b21f-c3f4-4554-a088-782a55d2d855"
     },
     {
-      "userId": "user-742a6332-2c47-41cc-a9fe-24a24b9086ad",
-      "tweetId": "tweet-bca93316-3c44-489c-9ba9-6804f14a99d7",
-      "createdAt": "2022-03-20T17:42:18.829Z",
-      "updatedAt": "2022-03-20T17:42:18.829Z",
-      "id": "favorite-a89cbeb9-8e4c-49e5-a382-873bfaf23495"
+      "userId": "user-c8e81822-c8ee-49f1-bddd-a0df5e87d8d6",
+      "tweetId": "tweet-194faee6-37ca-4379-84f0-a767e2a426de",
+      "createdAt": "2022-03-20T18:56:59.146Z",
+      "updatedAt": "2022-03-20T18:56:59.146Z",
+      "id": "favorite-8c225c48-ffbb-4aa7-b3a7-6d49c447b121"
     }
   ]
 }

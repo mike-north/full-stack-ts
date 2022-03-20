@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { isDefined } from '@full-stack-ts/shared';
 import * as React from 'react';
 import { useGetCurrentUserQuery } from './generated/graphql';
 import Header from './Header';
@@ -21,6 +22,11 @@ import Timeline from './Timeline';
 export const GET_CURRENT_USER = gql`
   query GetCurrentUser {
     currentUser {
+      favorites {
+        tweet {
+          id
+        }
+      }
       id
       name
       handle
@@ -37,25 +43,25 @@ export const GET_CURRENT_USER = gql`
   }
 `;
 
-
 const App: React.FC = () => {
   const { loading, error, data } = useGetCurrentUserQuery();
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (data) {
-    const { currentUser } = data;
-    return (
+  if (!data) return <p>No data.</p>;
+  const { currentUser } = data;
+  const { favorites: rawFavorites } = currentUser;
+  const favorites = (rawFavorites || []).map((f) => f.tweet?.id).filter(isDefined);
 
-        <div>
-          <LeftSidebar currentUser={currentUser} />
-          <Header currentUser={currentUser} />
+  return (
+    <div>
+      <LeftSidebar currentUser={currentUser} />
+      <Header currentUser={currentUser} />
 
-          <div id="container" className="wrapper nav-closed">
-            <Timeline />
-            <RightBar />
-          </div>
-        </div>
-    );
-  } else return <p>No data.</p>;
+      <div id="container" className="wrapper nav-closed">
+        <Timeline currentUserFavorites={favorites} />
+        <RightBar />
+      </div>
+    </div>
+  );
 };
 export default App;

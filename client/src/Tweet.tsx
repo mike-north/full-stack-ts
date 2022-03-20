@@ -1,5 +1,5 @@
-import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faEllipsisH, faRetweet } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart as faHeartHollow } from '@fortawesome/free-regular-svg-icons';
+import { faEllipsisH, faRetweet, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { formatDistanceToNow } from 'date-fns';
 import * as React from 'react';
@@ -7,6 +7,7 @@ import TweetMessage from './TweetMessage';
 import { humanFriendlyNumber } from './utils/number';
 
 export interface TweetProps {
+  isFavorited: boolean;
   message: string;
   createdAt: Date;
   author: {
@@ -25,6 +26,7 @@ const Tweet: React.FC<TweetProps> = ({
   likeCount,
   retweetCount,
   commentCount,
+  isFavorited,
   author: { name, handle, avatarUrl },
 }) => {
   return (
@@ -49,7 +51,7 @@ const Tweet: React.FC<TweetProps> = ({
             <FontAwesomeIcon icon={faRetweet} /> {humanFriendlyNumber(retweetCount)}
           </button>
           <button className="red">
-            <FontAwesomeIcon icon={faHeart} /> {humanFriendlyNumber(likeCount)}
+            <FontAwesomeIcon icon={isFavorited ? faHeartSolid : faHeartHollow} /> {humanFriendlyNumber(likeCount)}
           </button>
           <button className="blue">
             <FontAwesomeIcon icon={faEllipsisH} />
