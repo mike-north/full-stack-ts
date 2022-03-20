@@ -6,9 +6,11 @@
   "private": true,
   "scripts": {
     "dev": "yarn parcel src/index.html",
-    "build": "yarn parcel build  --dist-dir dist src/index.html"
+    "build": "yarn parcel build  --dist-dir dist src/index.html",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@fortawesome/fontawesome-free": "^6.1.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.0",
     "@fortawesome/free-brands-svg-icons": "^6.1.0",
@@ -16,11 +18,18 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@full-stack-ts/shared": "^0.0.0",
+    "@graphql-codegen/cli": "^2.6.2",
     "add": "^2.0.6",
     "date-fns": "^2.28.0",
+    "graphql": "^15.0.0",
     "yarn": "^1.22.18"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-operations": "2.3.5",
+    "@graphql-codegen/typescript-react-apollo": "3.2.11",
     "@types/react": "^17.0.41",
     "@types/react-dom": "^17.0.14",
     "parcel": "^2.3.2",

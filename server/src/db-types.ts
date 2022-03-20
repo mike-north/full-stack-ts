@@ -1,8 +1,8 @@
 export interface DbEntity {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
 }
 
 export interface DbTweet extends DbEntity {

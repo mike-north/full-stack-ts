@@ -3,6 +3,7 @@ import * as FileSync from 'lowdb/adapters/FileSync';
 import { DbSchema, DbTweet, DbUser } from './db-types';
 
 class Db {
+
   private adapter;
   private db;
 
@@ -18,6 +19,9 @@ class Db {
     if (!firstUser) throw new Error('No users in database');
     return firstUser;
   }
+  getUserTweets(userId: string) {
+    return this.db.get('tweets').filter(t => t.userId === userId).value();
+  }
 
   getUserById(id: string): DbUser | undefined {
     return this.db.get('users').find(u => u.id === id).value();
@@ -31,8 +35,8 @@ class Db {
     const tweets = this.db.get('tweets');
     const tweet: DbTweet = {
       ...tweetProps,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
       id: `tweet-${tweets.toLength().value() + 1}`,
     };
     tweets.push(tweet).write();
@@ -43,8 +47,8 @@ class Db {
     const users = this.db.get('users');
     let user: DbUser = {
       ...userProps,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
       id: `user-${users.toLength().value() + 1}`,
     };
     users.push(user).write();

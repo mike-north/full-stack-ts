@@ -1,7 +1,6 @@
-import { User } from '@full-stack-ts/shared';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
-import {  loadSchemaSync } from '@graphql-tools/load';
+import { loadSchemaSync } from '@graphql-tools/load';
 
 import { Config } from 'apollo-server';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
@@ -17,6 +16,13 @@ import {
 } from './constants';
 import Db from './db';
 import { seedDb } from './seed';
+import {
+  Resolver,
+  Resolvers,
+  ResolverTypeWrapper,
+  User,
+} from 'resolvers-types.generated';
+import { DbUser } from 'db-types';
 
 const schema = loadSchemaSync(GRAPHQL_SCHEMA_PATH, {
   loaders: [new GraphQLFileLoader()],
@@ -32,35 +38,45 @@ async function main() {
     seedDb(db);
   }
 
-  const resolvers = {
+  const userTransform = (dbUser: DbUser): User => {
+    if (!dbUser) throw new Error('Null user');
+    return {
+      id: dbUser.id,
+      handle: dbUser.handle,
+      name: dbUser.name,
+      avatarUrl: dbUser.avatarUrl,
+      createdAt: dbUser.createdAt,
+      updatedAt: dbUser.updatedAt,
+      deletedAt: dbUser.deletedAt,
+    };
+  };
+
+  const resolvers: Resolvers = {
     Query: {
-      currentUser(): User {
+      currentUser() {
         const dbUser = db.getFirstUser();
-        return {
-          id: dbUser.id,
-          handle: dbUser.handle,
-          name: dbUser.name,
-          avatarUrl: dbUser.avatarUrl,
-          createdAt: dbUser.createdAt,
-          updatedAt: dbUser.updatedAt,
-          deletedAt: dbUser.deletedAt,
-        };
+        console.log({ dbUser });
+        return userTransform(dbUser);
       },
-      user(parent: any, args: any, context: any, info: any): User | null {
-        console.log({ args, info })
-        const {id} = args;
-        console.log('ID: ' + id);
+      user(_parent, args, _context, info) {
+        const { id } = args;
         const dbUser = db.getUserById(id);
         if (!dbUser) return null;
-        return {
-          id: dbUser.id,
-          handle: dbUser.handle,
-          name: dbUser.name,
-          avatarUrl: dbUser.avatarUrl,
-          createdAt: dbUser.createdAt,
-          updatedAt: dbUser.updatedAt,
-          deletedAt: dbUser.deletedAt,
-        };
+        return userTransform(dbUser);
+      },
+    },
+    User: {
+      tweets(user) {
+        const rawTweets = db.getUserTweets(user.id);
+        return rawTweets.map((t) => ({
+          id: t.id,
+          body: t.message,
+          favorites: [] as any[],
+          author: user,
+          createdAt: t.createdAt,
+          updatedAt: t.updatedAt,
+          deletedAt: t.deletedAt,
+        }));
       },
     },
   };

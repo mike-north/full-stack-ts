@@ -2,9 +2,9 @@ type Tweet {
   id: String!
   author: User!
   body: String!
-  favorites: [Favorite!]!
-  createdAt: String
-  updatedAt: String
+  favorites: [Favorite!]
+  createdAt: String!
+  updatedAt: String!
   deletedAt: String
 }
 
@@ -12,20 +12,21 @@ type User {
   id: String!
   name: String!
   handle: String!
-  tweets: [Tweet!]!
-  favorites: [Tweet!]!
+  tweets: [Tweet!]
+  favorites: [Favorite!]
   avatarUrl: String!
   coverUrl: String
   createdAt: String!
   updatedAt: String!
+  deletedAt: String
 }
 
 type Favorite {
   id: String!
-  createdAt: String!
-  updatedAt: String!
   tweet: Tweet!
   user: User!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Query {
