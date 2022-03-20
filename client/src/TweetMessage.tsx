@@ -1,15 +1,15 @@
 import * as React from 'react';
 
-const URL_REGEXP = /(https?:\/\/[\w./&?\-_0-9]+)|(\n)/g;
-const YOUTUBE_URL_REGEXP = /https:\/\/www.youtube.com[\w./&?\-_]+/g;
-const IMAGE_URL_REGEXP = /https?:\/\/[\w./&?\-_0-9]+.(jpg|jpeg|gif|png)/g;
+const URL_REGEXP = /(https?:\/\/[:\w./&?\-_0-9@]+)|(\n)/g;
+const YOUTUBE_URL_REGEXP = /https:\/\/www.youtube.com[\w./&?\-_@]+/g;
+const IMAGE_URL_REGEXP = /https?:\/\/[:\w./&?\-_0-9@]+.(jpg|jpeg|gif|png)/g;
 
 const TweetMessage: React.FC<{ message: string }> = ({ message }) => {
   const parts = message.split(URL_REGEXP).filter(Boolean);
-  console.log({ parts })
+  console.log({ parts });
   return (
     <div className="message">
-      {parts.map((part,index) => {
+      {parts.map((part, index) => {
         if (YOUTUBE_URL_REGEXP.test(part)) {
           return (
             <div key={index} className="iframe-container">
@@ -22,8 +22,14 @@ const TweetMessage: React.FC<{ message: string }> = ({ message }) => {
             </div>
           );
         } else if (IMAGE_URL_REGEXP.test(part)) {
-          return <img key={index}  src={part} />;
-        } else return <p key={index} >{part}</p>;
+          return (
+            <img
+              style={{ maxHeight: 600, width: 'auto', margin: 'auto' }}
+              key={index}
+              src={part}
+            />
+          );
+        } else return <p key={index}>{part}</p>;
       })}
     </div>
   );
