@@ -129,6 +129,20 @@ class Db {
     favorites.push(favorite).write();
     return favorite;
   }
+  deleteFavorite(favoriteProps: Pick<DbFavorite, 'tweetId' | 'userId'>): DbFavorite {
+    const user = this.getUserById(favoriteProps.userId);
+    const tweet = this.getTweetById(favoriteProps.tweetId);
+    if (!user) throw new Error('User does not exist');
+    if (!tweet) throw new Error('Tweet does not exist');
+    const favorites = this.db.get('favorites');
+
+    const deleted = favorites.remove(
+      (f) => f.tweetId === tweet.id && f.userId === user.id
+    );
+
+    this.db.write();
+    return deleted.first().value();
+  }
 
   hasUser(predicate: (user: DbUser) => boolean): boolean {
     return !!this.db.get('users').find(predicate);

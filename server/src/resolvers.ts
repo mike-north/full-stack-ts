@@ -40,6 +40,13 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
         dbFavoriteMap[dbFavorite.id] = dbFavorite;
         return favoriteTransform(dbFavorite);
       },
+      deleteFavorite(_parent, args, context) {
+        const { tweetId, userId } = args;
+        const dbFavoriteMap = (context.dbFavoriteMap ||= {});
+        const dbFavorite = db.deleteFavorite({ tweetId, userId });
+        dbFavoriteMap[dbFavorite.id] = dbFavorite;
+        return favoriteTransform(dbFavorite);
+      },
     },
 
     User: {

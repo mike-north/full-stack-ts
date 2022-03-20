@@ -44,6 +44,9 @@ type Query {
   user(id: String!): User
   tweets: [Tweet!]
 }
+type DeletionResult {
+  deleted: [String!]
+}
 type Mutation {
   # createTweet(userId: String!): Favorite!
   createFavorite(tweetId: String!, userId: String!): Favorite!

@@ -14,6 +14,11 @@ export type Scalars = {
   Float: number;
 };
 
+export type DeletionResult = {
+  __typename?: 'DeletionResult';
+  deleted?: Maybe<Array<Scalars['String']>>;
+};
+
 export type Favorite = {
   __typename?: 'Favorite';
   createdAt: Scalars['String'];
@@ -159,6 +164,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  DeletionResult: ResolverTypeWrapper<DeletionResult>;
   Favorite: ResolverTypeWrapper<Favorite>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -172,6 +178,7 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  DeletionResult: DeletionResult;
   Favorite: Favorite;
   Int: Scalars['Int'];
   Mutation: {};
@@ -180,6 +187,11 @@ export type ResolversParentTypes = {
   Tweet: Tweet;
   User: User;
   UserStatistics: UserStatistics;
+};
+
+export type DeletionResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeletionResult'] = ResolversParentTypes['DeletionResult']> = {
+  deleted?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type FavoriteResolvers<ContextType = any, ParentType extends ResolversParentTypes['Favorite'] = ResolversParentTypes['Favorite']> = {
@@ -239,6 +251,7 @@ export type UserStatisticsResolvers<ContextType = any, ParentType extends Resolv
 };
 
 export type Resolvers<ContextType = any> = {
+  DeletionResult?: DeletionResultResolvers<ContextType>;
   Favorite?: FavoriteResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

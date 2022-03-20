@@ -58,7 +58,7 @@ const App: React.FC = () => {
       <Header currentUser={currentUser} />
 
       <div id="container" className="wrapper nav-closed">
-        <Timeline currentUserFavorites={favorites} />
+        <Timeline currentUserId={currentUser.id} currentUserFavorites={favorites} />
         <RightBar />
       </div>
     </div>

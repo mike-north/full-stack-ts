@@ -15,6 +15,11 @@ export type Scalars = {
   Float: number;
 };
 
+export type DeletionResult = {
+  __typename?: 'DeletionResult';
+  deleted?: Maybe<Array<Scalars['String']>>;
+};
+
 export type Favorite = {
   __typename?: 'Favorite';
   createdAt: Scalars['String'];
@@ -99,6 +104,22 @@ export type GetTimelineTweetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetTimelineTweetsQuery = { __typename?: 'Query', tweets?: Array<{ __typename?: 'Tweet', id: string, body: string, favoriteCount?: number | null, retweetCount?: number | null, commentCount?: number | null, createdAt: string, favorites?: Array<{ __typename?: 'Favorite', user?: { __typename?: 'User', id: string } | null }> | null, author?: { __typename?: 'User', name: string, handle: string, avatarUrl: string } | null }> | null };
+
+export type CreateFavoriteMutationVariables = Exact<{
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
+}>;
+
+
+export type CreateFavoriteMutation = { __typename?: 'Mutation', createFavorite: { __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null, user?: { __typename?: 'User', id: string } | null } };
+
+export type DeleteFavoriteMutationVariables = Exact<{
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
+}>;
+
+
+export type DeleteFavoriteMutation = { __typename?: 'Mutation', deleteFavorite: { __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null, user?: { __typename?: 'User', id: string } | null } };
 
 
 export const GetCurrentUserDocument = gql`
@@ -200,3 +221,81 @@ export function useGetTimelineTweetsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetTimelineTweetsQueryHookResult = ReturnType<typeof useGetTimelineTweetsQuery>;
 export type GetTimelineTweetsLazyQueryHookResult = ReturnType<typeof useGetTimelineTweetsLazyQuery>;
 export type GetTimelineTweetsQueryResult = Apollo.QueryResult<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>;
+export const CreateFavoriteDocument = gql`
+    mutation CreateFavorite($tweetId: String!, $userId: String!) {
+  createFavorite(tweetId: $tweetId, userId: $userId) {
+    tweet {
+      id
+    }
+    user {
+      id
+    }
+  }
+}
+    `;
+export type CreateFavoriteMutationFn = Apollo.MutationFunction<CreateFavoriteMutation, CreateFavoriteMutationVariables>;
+
+/**
+ * __useCreateFavoriteMutation__
+ *
+ * To run a mutation, you first call `useCreateFavoriteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateFavoriteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createFavoriteMutation, { data, loading, error }] = useCreateFavoriteMutation({
+ *   variables: {
+ *      tweetId: // value for 'tweetId'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useCreateFavoriteMutation(baseOptions?: Apollo.MutationHookOptions<CreateFavoriteMutation, CreateFavoriteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateFavoriteMutation, CreateFavoriteMutationVariables>(CreateFavoriteDocument, options);
+      }
+export type CreateFavoriteMutationHookResult = ReturnType<typeof useCreateFavoriteMutation>;
+export type CreateFavoriteMutationResult = Apollo.MutationResult<CreateFavoriteMutation>;
+export type CreateFavoriteMutationOptions = Apollo.BaseMutationOptions<CreateFavoriteMutation, CreateFavoriteMutationVariables>;
+export const DeleteFavoriteDocument = gql`
+    mutation DeleteFavorite($tweetId: String!, $userId: String!) {
+  deleteFavorite(tweetId: $tweetId, userId: $userId) {
+    tweet {
+      id
+    }
+    user {
+      id
+    }
+  }
+}
+    `;
+export type DeleteFavoriteMutationFn = Apollo.MutationFunction<DeleteFavoriteMutation, DeleteFavoriteMutationVariables>;
+
+/**
+ * __useDeleteFavoriteMutation__
+ *
+ * To run a mutation, you first call `useDeleteFavoriteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteFavoriteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteFavoriteMutation, { data, loading, error }] = useDeleteFavoriteMutation({
+ *   variables: {
+ *      tweetId: // value for 'tweetId'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useDeleteFavoriteMutation(baseOptions?: Apollo.MutationHookOptions<DeleteFavoriteMutation, DeleteFavoriteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteFavoriteMutation, DeleteFavoriteMutationVariables>(DeleteFavoriteDocument, options);
+      }
+export type DeleteFavoriteMutationHookResult = ReturnType<typeof useDeleteFavoriteMutation>;
+export type DeleteFavoriteMutationResult = Apollo.MutationResult<DeleteFavoriteMutation>;
+export type DeleteFavoriteMutationOptions = Apollo.BaseMutationOptions<DeleteFavoriteMutation, DeleteFavoriteMutationVariables>;
