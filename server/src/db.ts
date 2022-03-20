@@ -4,6 +4,7 @@ import { DbSchema, DbTweet, DbUser } from './db-types';
 
 class Db {
 
+
   private adapter;
   private db;
 
@@ -26,6 +27,13 @@ class Db {
   getUserById(id: string): DbUser | undefined {
     return this.db.get('users').find(u => u.id === id).value();
   }
+  getTweetById(id: string) {
+    return this.db.get('tweets').find(t => t.id === id).value();
+  }
+  getTweetsByUserId(userId: string) {
+    return this.db.get('tweets').filter(t => t.userId === userId).value();
+  }
+
 
   getAllTweets(): DbTweet[] {
     return this.db.get('tweets').value();

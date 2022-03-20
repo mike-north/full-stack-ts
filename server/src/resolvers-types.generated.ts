@@ -27,12 +27,18 @@ export type Query = {
   __typename?: 'Query';
   currentUser: User;
   tweet?: Maybe<Tweet>;
+  tweets?: Maybe<Array<Tweet>>;
   user?: Maybe<User>;
 };
 
 
 export type QueryTweetArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryTweetsArgs = {
+  authorId: Scalars['String'];
 };
 
 
@@ -164,6 +170,7 @@ export type FavoriteResolvers<ContextType = any, ParentType extends ResolversPar
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   currentUser?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   tweet?: Resolver<Maybe<ResolversTypes['Tweet']>, ParentType, ContextType, RequireFields<QueryTweetArgs, 'id'>>;
+  tweets?: Resolver<Maybe<Array<ResolversTypes['Tweet']>>, ParentType, ContextType, RequireFields<QueryTweetsArgs, 'authorId'>>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
 };
 

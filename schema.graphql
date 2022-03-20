@@ -33,4 +33,5 @@ type Query {
   currentUser: User!
   user(id: String!): User
   tweet(id: String!): Tweet
+  tweets(authorId: String!): [Tweet!]
 }
