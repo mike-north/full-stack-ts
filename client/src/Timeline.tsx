@@ -45,7 +45,7 @@ const Timeline: React.FC<TimelineProps> = ({
   console.log({ currentUserFavorites });
   return (
     <div id="timeline">
-      <ComposePanel />
+      <ComposePanel currentUser={{id: currentUserId}} />
       {tweets.map((t) => {
         const author = t.author;
         if (!author) throw new Error(`Tweet ${t.id} has no author!`);

@@ -33,6 +33,13 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
       },
     },
     Mutation: {
+      createTweet(_parent, args, context) {
+        const { body, userId } = args;
+        const dbTweet = db.createTweet({ message: body, userId });
+        const dbTweetMap = (context.dbTweetMap ||= {});
+        dbTweetMap[dbTweet.id] = dbTweet;
+        return tweetTransform(dbTweet);
+      },
       createFavorite(_parent, args, context) {
         const { tweetId, userId } = args;
         const dbFavorite = db.createFavorite({ tweetId, userId });

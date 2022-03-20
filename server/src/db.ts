@@ -75,7 +75,11 @@ class Db {
   }
 
   getAllTweets(): DbTweet[] {
-    return this.db.get('tweets').value();
+    return this.db
+      .get('tweets')
+      .sortBy((t) => new Date(t.createdAt).valueOf())
+      .reverse()
+      .value();
   }
 
   getFavoritesForTweet(tweetId: string): DbFavorite[] {
@@ -129,7 +133,9 @@ class Db {
     favorites.push(favorite).write();
     return favorite;
   }
-  deleteFavorite(favoriteProps: Pick<DbFavorite, 'tweetId' | 'userId'>): DbFavorite {
+  deleteFavorite(
+    favoriteProps: Pick<DbFavorite, 'tweetId' | 'userId'>
+  ): DbFavorite {
     const user = this.getUserById(favoriteProps.userId);
     const tweet = this.getTweetById(favoriteProps.tweetId);
     if (!user) throw new Error('User does not exist');

@@ -22,7 +22,7 @@ export function seedDb(db: Db) {
       }),
       db.createTweet({
         userId: firstUser.id,
-        message: "Hello world! I'm another tweet!",
+        message: "Here's my story! https://www.youtube.com/embed/j02UgcixOU0",
       }),
       db.createTweet({
         userId: secondUser.id,

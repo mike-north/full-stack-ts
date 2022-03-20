@@ -31,12 +31,19 @@ export type Favorite = {
 export type Mutation = {
   __typename?: 'Mutation';
   createFavorite: Favorite;
+  createTweet: Tweet;
   deleteFavorite: Favorite;
 };
 
 
 export type MutationCreateFavoriteArgs = {
   tweetId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
+
+export type MutationCreateTweetArgs = {
+  body: Scalars['String'];
   userId: Scalars['String'];
 };
 
@@ -205,6 +212,7 @@ export type FavoriteResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createFavorite?: Resolver<ResolversTypes['Favorite'], ParentType, ContextType, RequireFields<MutationCreateFavoriteArgs, 'tweetId' | 'userId'>>;
+  createTweet?: Resolver<ResolversTypes['Tweet'], ParentType, ContextType, RequireFields<MutationCreateTweetArgs, 'body' | 'userId'>>;
   deleteFavorite?: Resolver<ResolversTypes['Favorite'], ParentType, ContextType, RequireFields<MutationDeleteFavoriteArgs, 'tweetId' | 'userId'>>;
 };
 
