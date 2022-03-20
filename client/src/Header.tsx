@@ -1,22 +1,41 @@
 import * as React from 'react';
 import CurrentUserSummary from './CurrentUserSummary';
+import { DetailedUser } from '@full-stack-ts/shared';
 
-const Header: React.FC = () => (
-  <header className="nav-closed">
-    <div className="wrapper">
-      <div className="top">
-        <img src="http://localhost:3000/static/profile-pic.png" />
-        <div className="user">
-          <h2>Ian | Gibbu</h2>
-          <p>@Gibbu_</p>
+export interface HeaderProps {
+  currentUser: DetailedUser;
+}
+
+const Header: React.FC<HeaderProps> = ({ currentUser }) => {
+  const {
+    avatarUrl,
+    name,
+    handle,
+    followerCount,
+    tweetCount,
+    followingCount,
+    coverUrl,
+  } = currentUser;
+  return (
+    <header
+      className="nav-closed"
+      style={{ backgroundImage: `url('${coverUrl}')` }}
+    >
+      <div className="wrapper">
+        <div className="top">
+          <img src={avatarUrl} />
+          <div className="user">
+            <h2>{name}</h2>
+            <p>@{handle}</p>
+          </div>
         </div>
+        <CurrentUserSummary
+          followerCount={followerCount}
+          tweetCount={tweetCount}
+          followingCount={followingCount}
+        />
       </div>
-      <CurrentUserSummary
-        followerCount={24314}
-        tweetCount={36144}
-        followingCount={127}
-      />
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 export default Header;

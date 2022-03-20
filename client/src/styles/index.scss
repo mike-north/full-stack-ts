@@ -595,6 +595,9 @@ nav {
     border-radius: 0 0 5px 5px;
     overflow: hidden;
     display: none;
+    &.open {
+      display: block;
+    }
     .result {
       padding: 10px;
       box-sizing: border-box;

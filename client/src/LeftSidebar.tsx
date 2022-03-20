@@ -7,9 +7,14 @@ import {
   faHashtag,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { User } from '@full-stack-ts/shared';
 import * as React from 'react';
 
-const LeftSidebar: React.FC = () => {
+export interface LeftSidebarProps {
+  currentUser: User;
+}
+
+const LeftSidebar: React.FC<LeftSidebarProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
@@ -22,11 +27,11 @@ const LeftSidebar: React.FC = () => {
       <div id="more-popout" className={isOpen ? 'nav-open' : 'nav-closed'}>
         <div className="nav-item">
           <div className="icon-container">
-            <img src="https://pbs.twimg.com/profile_images/1153329245248053248/xONN2R7u_400x400.png" />
+            <img src={currentUser.avatarUrl} />
           </div>
           <div className="nav-text">
-            <p>Ian | Gibbu</p>
-            <span>@Gibbu_</span>
+            <p>{currentUser.name}</p>
+            <span>@{currentUser.handle}</span>
           </div>
         </div>
         <div className="nav-item">
@@ -152,7 +157,7 @@ const LeftSidebar: React.FC = () => {
           data-balloon-blunt
         >
           <div className="icon-container">
-            <img src="http://localhost:3000/static/profile-pic.png" />
+            <img src={currentUser.avatarUrl} />
           </div>
           <div className="nav-text">
             <p>Profile</p>
