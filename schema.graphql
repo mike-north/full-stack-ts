@@ -1,11 +1,13 @@
 type Tweet {
   id: String!
-  author: User!
+  author: User
   body: String!
   favorites: [Favorite!]
+  favoriteCount: Int
+  retweetCount: Int
+  commentCount: Int
   createdAt: String!
   updatedAt: String!
-  deletedAt: String
 }
 
 type User {
@@ -14,17 +16,25 @@ type User {
   handle: String!
   tweets: [Tweet!]
   favorites: [Favorite!]
-  avatarUrl: String!
   coverUrl: String
+  avatarUrl: String!
   createdAt: String!
   updatedAt: String!
   deletedAt: String
+  statistics: UserStatistics
+}
+
+type UserStatistics {
+  user: User!
+  tweetCount: Int!
+  followingCount: Int!
+  followerCount: Int!
 }
 
 type Favorite {
   id: String!
-  tweet: Tweet!
-  user: User!
+  tweet: Tweet
+  user: User
   createdAt: String!
   updatedAt: String!
 }
@@ -32,6 +42,10 @@ type Favorite {
 type Query {
   currentUser: User!
   user(id: String!): User
-  tweet(id: String!): Tweet
-  tweets(authorId: String!): [Tweet!]
+  tweets: [Tweet!]
+}
+type Mutation {
+  # createTweet(userId: String!): Favorite!
+  createFavorite(tweetId: String!, userId: String!): Favorite!
+  deleteFavorite(tweetId: String!, userId: String!): Favorite!
 }

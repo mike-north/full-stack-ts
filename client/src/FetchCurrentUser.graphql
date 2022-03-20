@@ -1,6 +1,0 @@
-
-  query GetCurrentUser {
-    currentUser {
-      handle
-    }
-  }

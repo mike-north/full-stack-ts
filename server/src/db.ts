@@ -1,10 +1,38 @@
 import * as low from 'lowdb';
 import * as FileSync from 'lowdb/adapters/FileSync';
-import { DbSchema, DbTweet, DbUser } from './db-types';
+import { v4 as uuid } from 'uuid';
+
+export interface DbEntity {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+}
+
+export interface DbTweet extends DbEntity {
+  message: string;
+  userId: string;
+}
+
+export interface DbUser extends DbEntity {
+  id: string;
+  avatarUrl: string;
+  handle: string;
+  name: string;
+}
+
+export interface DbFavorite extends DbEntity {
+  tweetId: string;
+  userId: string;
+}
+
+export interface DbSchema {
+  tweets: DbTweet[];
+  users: DbUser[];
+  favorites: DbFavorite[];
+}
 
 class Db {
-
-
   private adapter;
   private db;
 
@@ -12,7 +40,7 @@ class Db {
     this.adapter = new FileSync<DbSchema>(filePath);
     this.db = low(this.adapter);
     this.db.read();
-    this.db.defaults({ tweets: [], users: [] });
+    this.db.defaults({ tweets: [], users: [], favorites: [] }).write();
   }
 
   getFirstUser(): DbUser {
@@ -20,23 +48,44 @@ class Db {
     if (!firstUser) throw new Error('No users in database');
     return firstUser;
   }
-  getUserTweets(userId: string) {
-    return this.db.get('tweets').filter(t => t.userId === userId).value();
-  }
 
-  getUserById(id: string): DbUser | undefined {
-    return this.db.get('users').find(u => u.id === id).value();
+  getUserById(id: string) {
+    return this.db
+      .get('users')
+      .find((u) => u.id === id)
+      .value();
   }
   getTweetById(id: string) {
-    return this.db.get('tweets').find(t => t.id === id).value();
+    return this.db
+      .get('tweets')
+      .find((t) => t.id === id)
+      .value();
   }
-  getTweetsByUserId(userId: string) {
-    return this.db.get('tweets').filter(t => t.userId === userId).value();
+  getUserTweets(userId: string) {
+    return this.db
+      .get('tweets')
+      .filter((t) => t.userId === userId)
+      .value();
   }
-
+  getUserFavorites(userId: string) {
+    return this.db
+      .get('favorites')
+      .filter((f) => f.userId === userId)
+      .value();
+  }
 
   getAllTweets(): DbTweet[] {
     return this.db.get('tweets').value();
+  }
+
+  getFavoritesForTweet(tweetId: string): DbFavorite[] {
+    return this.db
+      .get('favorites')
+      .filter((t) => t.tweetId === tweetId)
+      .value();
+  }
+  getFavoriteCountForTweet(tweetId: string): number {
+    return this.getFavoritesForTweet(tweetId).length;
   }
 
   createTweet(tweetProps: Pick<DbTweet, 'message' | 'userId'>): DbTweet {
@@ -45,7 +94,7 @@ class Db {
       ...tweetProps,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      id: `tweet-${tweets.toLength().value() + 1}`,
+      id: `tweet-${uuid()}`,
     };
     tweets.push(tweet).write();
     return tweet;
@@ -57,10 +106,28 @@ class Db {
       ...userProps,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      id: `user-${users.toLength().value() + 1}`,
+      id: `user-${uuid()}`,
     };
     users.push(user).write();
     return user;
+  }
+
+  createFavorite(
+    favoriteProps: Pick<DbFavorite, 'tweetId' | 'userId'>
+  ): DbFavorite {
+    const user = this.getUserById(favoriteProps.userId);
+    const tweet = this.getTweetById(favoriteProps.tweetId);
+    if (!user) throw new Error('User does not exist');
+    if (!tweet) throw new Error('Tweet does not exist');
+    const favorites = this.db.get('favorites');
+    let favorite: DbFavorite = {
+      ...favoriteProps,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      id: `favorite-${uuid()}`,
+    };
+    favorites.push(favorite).write();
+    return favorite;
   }
 
   hasUser(predicate: (user: DbUser) => boolean): boolean {

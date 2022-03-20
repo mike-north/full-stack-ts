@@ -1,5 +1,5 @@
-import { DbTweet, DbUser } from "db-types";
-import { Tweet, User } from "resolvers-types.generated";
+import { DbFavorite, DbTweet, DbUser } from "./db";
+import { Favorite, Tweet, User } from "resolvers-types.generated";
 
 export const userTransform = (dbUser: DbUser): User => {
   return {
@@ -9,7 +9,6 @@ export const userTransform = (dbUser: DbUser): User => {
     avatarUrl: dbUser.avatarUrl,
     createdAt: dbUser.createdAt,
     updatedAt: dbUser.updatedAt,
-    deletedAt: dbUser.deletedAt,
   };
 };
 
@@ -20,6 +19,12 @@ export const tweetTransform = (t: DbTweet): Omit<Tweet, 'author'> => {
     favorites: [] as any[],
     createdAt: t.createdAt,
     updatedAt: t.updatedAt,
-    deletedAt: t.deletedAt,
+  };
+};
+export const favoriteTransform = (t: DbFavorite): Omit<Favorite, 'user'|'tweet'> => {
+  return {
+    id: t.id,
+    createdAt: t.createdAt,
+    updatedAt: t.updatedAt
   };
 };

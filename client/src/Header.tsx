@@ -7,15 +7,8 @@ export interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ currentUser }) => {
-  const {
-    avatarUrl,
-    name,
-    handle,
-    followerCount,
-    tweetCount,
-    followingCount,
-    coverUrl,
-  } = currentUser;
+  const { avatarUrl, name, handle, statistics, coverUrl } = currentUser;
+  const { followerCount, tweetCount, followingCount } = statistics;
   return (
     <header
       className="nav-closed"

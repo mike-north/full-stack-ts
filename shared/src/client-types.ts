@@ -1,8 +1,8 @@
 export interface Entity {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
 }
 export interface User extends Entity {
   name: string;
@@ -10,13 +10,16 @@ export interface User extends Entity {
   avatarUrl: string;
 }
 
-export interface DetailedUser extends User {
-  coverUrl: string;
+export interface UserStatistics {
   followerCount: number;
   tweetCount: number;
   followingCount: number;
 }
 
+export interface DetailedUser extends User {
+  coverUrl?: string | null;
+  statistics: UserStatistics;
+}
 
 export interface HashtagTrend {
   hashtag: string;

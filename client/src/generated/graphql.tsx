@@ -19,21 +19,34 @@ export type Favorite = {
   __typename?: 'Favorite';
   createdAt: Scalars['String'];
   id: Scalars['String'];
-  tweet: Tweet;
+  tweet?: Maybe<Tweet>;
   updatedAt: Scalars['String'];
-  user: User;
+  user?: Maybe<User>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createFavorite: Favorite;
+  deleteFavorite: Favorite;
+};
+
+
+export type MutationCreateFavoriteArgs = {
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
+
+export type MutationDeleteFavoriteArgs = {
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
 };
 
 export type Query = {
   __typename?: 'Query';
   currentUser: User;
-  tweet?: Maybe<Tweet>;
+  tweets?: Maybe<Array<Tweet>>;
   user?: Maybe<User>;
-};
-
-
-export type QueryTweetArgs = {
-  id: Scalars['String'];
 };
 
 
@@ -43,11 +56,14 @@ export type QueryUserArgs = {
 
 export type Tweet = {
   __typename?: 'Tweet';
-  author: User;
+  author?: Maybe<User>;
   body: Scalars['String'];
+  commentCount?: Maybe<Scalars['Int']>;
   createdAt: Scalars['String'];
-  deletedAt?: Maybe<Scalars['String']>;
+  favoriteCount?: Maybe<Scalars['Int']>;
+  favorites?: Maybe<Array<Favorite>>;
   id: Scalars['String'];
+  retweetCount?: Maybe<Scalars['Int']>;
   updatedAt: Scalars['String'];
 };
 
@@ -57,22 +73,44 @@ export type User = {
   coverUrl?: Maybe<Scalars['String']>;
   createdAt: Scalars['String'];
   deletedAt?: Maybe<Scalars['String']>;
+  favorites?: Maybe<Array<Favorite>>;
   handle: Scalars['String'];
   id: Scalars['String'];
   name: Scalars['String'];
+  statistics?: Maybe<UserStatistics>;
+  tweets?: Maybe<Array<Tweet>>;
   updatedAt: Scalars['String'];
+};
+
+export type UserStatistics = {
+  __typename?: 'UserStatistics';
+  followerCount: Scalars['Int'];
+  followingCount: Scalars['Int'];
+  tweetCount: Scalars['Int'];
+  user: User;
 };
 
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', handle: string } };
+export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, updatedAt: string, coverUrl?: string | null, statistics?: { __typename?: 'UserStatistics', tweetCount: number, followerCount: number, followingCount: number } | null } };
 
 
 export const GetCurrentUserDocument = gql`
     query GetCurrentUser {
   currentUser {
+    id
+    name
     handle
+    avatarUrl
+    createdAt
+    updatedAt
+    coverUrl
+    statistics {
+      tweetCount
+      followerCount
+      followingCount
+    }
   }
 }
     `;

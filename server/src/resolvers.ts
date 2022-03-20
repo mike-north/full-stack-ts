@@ -1,12 +1,19 @@
-import Db from './db';
+import { default as Db, DbTweet, DbFavorite, DbUser } from './db';
 import { Resolvers } from 'resolvers-types.generated';
-import { tweetTransform, userTransform } from './transforms';
+import { favoriteTransform, tweetTransform, userTransform } from './transforms';
 
-function createResolvers(db: Db): Resolvers {
-  const resolvers: Resolvers = {
+interface ResolverContext {
+  currentUser?: DbUser;
+  dbTweetMap?: Record<string, DbTweet>;
+  dbFavoriteMap?: Record<string, DbFavorite>;
+}
+
+function createResolvers(db: Db): Resolvers<ResolverContext> {
+  const resolvers: Resolvers<ResolverContext> = {
     Query: {
-      currentUser() {
+      currentUser(_parent, _args, context) {
         const dbUser = db.getFirstUser();
+        context.currentUser = dbUser;
         return userTransform(dbUser);
       },
       user(_parent, args) {
@@ -15,44 +22,111 @@ function createResolvers(db: Db): Resolvers {
         if (!dbUser) return null;
         return userTransform(dbUser);
       },
-      tweet(_parent, args) {
-        const { id } = args;
-        const dbTweet = db.getTweetById(id);
-        const author = db.getUserById(dbTweet.userId);
-        if (!author) throw new Error(`Null author for tweet ${dbTweet.id}`);
-        if (!dbTweet) return null;
-        return { ...tweetTransform(dbTweet), author };
-      },
-      tweets(_parent, args) {
-        const { authorId } = args;
-        const dbTweets = db.getTweetsByUserId(authorId);
-        if (!dbTweets) return null;
+      tweets(_parent, _args, context) {
+        const dbTweets = db.getAllTweets();
+        const dbTweetMap = (context.dbTweetMap ||= {});
+
         return dbTweets.map((t) => {
-          const author = db.getUserById(t.userId);
-          if (!author) throw new Error(`Null author for tweet ${t.id}`);
-          return { ...tweetTransform(t), author };
+          dbTweetMap[t.id] = t;
+          return tweetTransform(t);
         });
       },
     },
+    Mutation: {
+      createFavorite(_parent, args, context) {
+        const { tweetId, userId } = args;
+        const dbFavorite = db.createFavorite({ tweetId, userId });
+        const dbFavoriteMap = (context.dbFavoriteMap ||= {});
+        dbFavoriteMap[dbFavorite.id] = dbFavorite;
+        return favoriteTransform(dbFavorite);
+      },
+    },
+
     User: {
-      tweets(user) {
+      tweets(user, _args, context) {
         const rawTweets = db.getUserTweets(user.id);
-        return rawTweets.map((t) => ({
-          id: t.id,
-          body: t.message,
-          favorites: [] as any[],
-          author: user,
-          createdAt: t.createdAt,
-          updatedAt: t.updatedAt,
-          deletedAt: t.deletedAt,
-        }));
+        const dbTweetMap = (context.dbTweetMap ||= {});
+        return rawTweets.map((t) => {
+          dbTweetMap[t.id] = t;
+          return tweetTransform(t);
+        });
+      },
+      favorites(user, _args, context) {
+        const rawFavorites = db.getUserFavorites(user.id);
+        const dbFavoriteMap = (context.dbFavoriteMap ||= {});
+        return rawFavorites.map((f) => {
+          dbFavoriteMap[f.id] = f;
+          return favoriteTransform(f);
+        });
+      },
+      statistics(user) {
+        return {
+          user,
+          followerCount: 88,
+          tweetCount: 66,
+          followingCount: 77,
+        };
+      },
+    },
+    Favorite: {
+      tweet(favorite, _args, context) {
+        const { dbFavoriteMap } = context;
+        if (!dbFavoriteMap)
+          throw new Error(
+            'Favorite.tweet resolver expected dbFavoriteMap to be populated, and it was found to be missing'
+          );
+        const dbFavorite = dbFavoriteMap[favorite.id];
+        if (!dbFavorite)
+          throw new Error(`Favorite ${favorite.id} not found in dbFavoriteMap`);
+        const dbTweet = db.getTweetById(dbFavorite.tweetId);
+        return tweetTransform(dbTweet);
+      },
+      user(favorite, _args, context) {
+        const { dbFavoriteMap } = context;
+        if (!dbFavoriteMap)
+          throw new Error(
+            'Favorite.tweet resolver expected dbFavoriteMap to be populated, and it was found to be missing'
+          );
+        const dbFavorite = dbFavoriteMap[favorite.id];
+        if (!dbFavorite)
+          throw new Error(`Favorite ${favorite.id} not found in dbFavoriteMap`);
+        const dbUser = db.getUserById(dbFavorite.userId);
+        return userTransform(dbUser);
       },
     },
     Tweet: {
-      author(tweet) {
-        const rawAuthor = db.getUserById(tweet.author.id);
-        if (!rawAuthor) throw new Error(`No user with id ${tweet.author.id}`);
-        return userTransform(rawAuthor);
+      favoriteCount(tweet) {
+        const { id } = tweet;
+        return db.getFavoriteCountForTweet(id);
+      },
+      commentCount(_tweet) {
+        return 99;
+      },
+      retweetCount(_tweet) {
+        return 999;
+      },
+      favorites(tweet, _args, context) {
+        const { id } = tweet;
+        const rawFavorites = db.getFavoritesForTweet(id);
+        const dbFavoriteMap = (context.dbFavoriteMap ||= {});
+        return rawFavorites.map((f) => {
+          dbFavoriteMap[f.id] = f;
+          return favoriteTransform(f);
+        });
+      },
+      author(tweet, _args, context) {
+        const { dbTweetMap } = context;
+        console.log({ context });
+        if (!dbTweetMap)
+          throw new Error(
+            'Tweet.author resolver expected dbTweetMap to be populated, and it was found to be missing'
+          );
+        const dbTweet = dbTweetMap[tweet.id];
+        if (!dbTweet)
+          throw new Error(`Tweet ${tweet.id} not found in dbTweetMap`);
+        const dbUser = db.getUserById(dbTweet.userId);
+        if (!dbUser) throw new Error(`Tweet ${tweet.id} has no author`);
+        return userTransform(dbUser);
       },
     },
   };

@@ -6,14 +6,30 @@
   "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
   "license": "NOLICENSE",
   "private": true,
+  "scripts": {
+    "build-client": "cd client && yarn build",
+    "build-server": "cd server && yarn build",
+    "build-shared": "cd shared && yarn build",
+    "test-client": "cd client && yarn test",
+    "test-server": "cd server && yarn test",
+    "test-shared": "cd shared && yarn test",
+    "codegen-client": "cd client && yarn codegen",
+    "codegen-server": "cd server && yarn codegen",
+    "codegen": "concurrently yarn:codegen-* -c cyan,magenta",
+    "build": "concurrently yarn:build-* -c cyan,magenta,yellow",
+    "test": "concurrently yarn:test-* -c cyan,magenta,yellow",
+    "start": "cd server && yarn dev"
+  },
   "workspaces": [
     "client",
     "server",
     "shared"
   ],
   "devDependencies": {
+    "@parcel/core": "^2.3.2",
     "@parcel/transformer-sass": "2.3.2",
-    "prettier": "^2.6.0"
+    "prettier": "^2.6.0",
+    "process": "^0.11.10"
   },
   "volta": {
     "node": "16.14.2",

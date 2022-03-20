@@ -4,14 +4,14 @@ import {
   faBookmark,
   faEllipsisH,
   faEnvelope,
-  faHashtag,
+  faHashtag
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { User } from '@full-stack-ts/shared';
+import { DetailedUser } from '@full-stack-ts/shared';
 import * as React from 'react';
 
 export interface LeftSidebarProps {
-  currentUser: User;
+  currentUser: DetailedUser;
 }
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ currentUser }) => {
