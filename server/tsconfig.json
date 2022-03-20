@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "module": "ESNext",
+    "module": "CommonJS",
     "baseUrl": "./src",
     "allowSyntheticDefaultImports": true
   },

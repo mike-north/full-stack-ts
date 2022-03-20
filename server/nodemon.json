@@ -2,8 +2,8 @@
   "verbose": true,
   "ignore": ["src"],
   "execMap": {
-    "js": "node --experimental-specifier-resolution=node"
+    "js": "node"
   },
-  "watch": ["dist", "../shared/dist"],
+  "watch": ["dist", "../shared/dist", "../schema.graphql"],
   "ext": "ts,js,json,html"
 }

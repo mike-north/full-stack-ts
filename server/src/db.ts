@@ -1,53 +1,62 @@
-import { JSONFileSync, LowSync } from 'lowdb';
+import * as low from 'lowdb';
+import * as FileSync from 'lowdb/adapters/FileSync';
 import { DbSchema, DbTweet, DbUser } from './db-types';
 
 class Db {
-  private adapter: JSONFileSync<DbSchema>;
-  private db: LowSync<DbSchema>;
-  private data: DbSchema;
+  private adapter;
+  private db;
 
   constructor(filePath: string) {
-    this.adapter = new JSONFileSync<DbSchema>(filePath);
-    this.db = new LowSync(this.adapter);
+    this.adapter = new FileSync<DbSchema>(filePath);
+    this.db = low(this.adapter);
     this.db.read();
-    this.db.data ||= { tweets: [], users: [] };
-    this.data = this.db.data;
+    this.db.defaults({ tweets: [], users: [] });
+  }
+
+  getFirstUser(): DbUser {
+    const firstUser = this.db.get('users').first().value();
+    if (!firstUser) throw new Error('No users in database');
+    return firstUser;
+  }
+
+  getUserById(id: string): DbUser | undefined {
+    return this.db.get('users').find(u => u.id === id).value();
   }
 
   getAllTweets(): DbTweet[] {
-    return this.data.tweets;
+    return this.db.get('tweets').value();
   }
 
   createTweet(tweetProps: Pick<DbTweet, 'message' | 'userId'>): DbTweet {
+    const tweets = this.db.get('tweets');
     const tweet: DbTweet = {
       ...tweetProps,
       createdAt: new Date(),
       updatedAt: new Date(),
-      id: `tweet-${this.data.tweets.length + 1}`,
+      id: `tweet-${tweets.toLength().value() + 1}`,
     };
-    this.data.tweets.push(tweet);
-    this.write();
+    tweets.push(tweet).write();
     return tweet;
   }
 
   createUser(userProps: Pick<DbUser, 'name' | 'handle' | 'avatarUrl'>): DbUser {
+    const users = this.db.get('users');
     let user: DbUser = {
       ...userProps,
       createdAt: new Date(),
       updatedAt: new Date(),
-      id: `user-${this.data.users.length + 1}`,
+      id: `user-${users.toLength().value() + 1}`,
     };
-    this.data.users.push(user);
-    this.write();
+    users.push(user).write();
     return user;
   }
 
   hasUser(predicate: (user: DbUser) => boolean): boolean {
-    return this.data.users.some(predicate);
+    return !!this.db.get('users').find(predicate);
   }
 
   getAllUsers(): DbUser[] {
-    return this.data.users;
+    return this.db.get('users').value();
   }
 
   write(): void {

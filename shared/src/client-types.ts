@@ -1,4 +1,10 @@
-export interface User {
+export interface Entity {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date;
+}
+export interface User extends Entity {
   name: string;
   handle: string;
   avatarUrl: string;

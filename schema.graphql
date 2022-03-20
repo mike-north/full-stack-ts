@@ -1,0 +1,35 @@
+type Tweet {
+  id: String!
+  author: User!
+  body: String!
+  favorites: [Favorite!]!
+  createdAt: String
+  updatedAt: String
+  deletedAt: String
+}
+
+type User {
+  id: String!
+  name: String!
+  handle: String!
+  tweets: [Tweet!]!
+  favorites: [Tweet!]!
+  avatarUrl: String!
+  coverUrl: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Favorite {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  tweet: Tweet!
+  user: User!
+}
+
+type Query {
+  currentUser: User!
+  user(id: String!): User
+  tweet(id: String!): Tweet
+}

@@ -2,6 +2,7 @@ export interface DbEntity {
   id: string;
   createdAt: Date;
   updatedAt: Date;
+  deletedAt?: Date;
 }
 
 export interface DbTweet extends DbEntity {
@@ -11,7 +12,7 @@ export interface DbTweet extends DbEntity {
 
 export interface DbUser extends DbEntity {
   id: string;
-  avatarUrl?: string;
+  avatarUrl: string;
   handle: string;
   name: string;
 }

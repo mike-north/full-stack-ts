@@ -3,15 +3,15 @@
     {
       "userId": "user-1",
       "message": "Hello world! I'm a tweet!",
-      "createdAt": "2022-03-19T21:08:02.323Z",
-      "updatedAt": "2022-03-19T21:08:02.323Z",
+      "createdAt": "2022-03-20T04:53:15.549Z",
+      "updatedAt": "2022-03-20T04:53:15.549Z",
       "id": "tweet-1"
     },
     {
       "userId": "user-1",
       "message": "Hello world! I'm another tweet!",
-      "createdAt": "2022-03-19T21:08:02.323Z",
-      "updatedAt": "2022-03-19T21:08:02.323Z",
+      "createdAt": "2022-03-20T04:53:15.550Z",
+      "updatedAt": "2022-03-20T04:53:15.550Z",
       "id": "tweet-2"
     }
   ],
@@ -19,8 +19,9 @@
     {
       "name": "Mike North",
       "handle": "michaellnorth",
-      "createdAt": "2022-03-19T21:08:02.322Z",
-      "updatedAt": "2022-03-19T21:08:02.322Z",
+      "avatarUrl": "http://placecorgi.com/300/300",
+      "createdAt": "2022-03-20T04:53:15.548Z",
+      "updatedAt": "2022-03-20T04:53:15.548Z",
       "id": "user-1"
     }
   ]
