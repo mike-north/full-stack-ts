@@ -2,7 +2,12 @@ import Db from './db';
 
 export function seedDb(db: Db) {
   if (db.getAllUsers().length === 0) {
-    const [mike, lisa, marc, fem] = [
+    const [_student,mike, lisa, marc, fem] = [
+      db.createUser({
+        name: 'Stu Dent',
+        handle: 'student',
+        avatarUrl: 'https://placehold.it/g/200/200',
+      }),
       db.createUser({
         name: 'Mike North',
         handle: 'michaellnorth',
@@ -39,13 +44,22 @@ export function seedDb(db: Db) {
       db.createTweet({
         userId: lisa.id,
         message:
-          "@1Marc I'm having trouble logging into FEM. This is the captcha I'm being asked to solve. Seems a bit challenging http://localhost:3000/static/captcha-1.jpg ",
+        "@1Marc I'm having trouble logging into FEM. This is the captcha I'm being asked to solve. Seems a bit challenging http://localhost:3000/static/captcha-1.jpg ",
+      }),
+      db.createTweet({
+        userId: marc.id,
+        message:
+          `@${lisa.handle} I just deployed a new version of the UI. Mind trying again?`,
       }),
       db.createTweet({
         userId: lisa.id,
         message: `@FrontendMasters I'm still having trouble with the login captchas. Am I supposed to take a class before solving this one? http://localhost:3000/static/captcha-4.jpg`,
       }),
     ];
+    db.createFavorite({ userId: fem.id, tweetId: tweet2.id });
+    db.createFavorite({ userId: fem.id, tweetId: tweet4.id });
+    db.createFavorite({ userId: marc.id, tweetId: tweet2.id });
+    db.createFavorite({ userId: marc.id, tweetId: tweet4.id });
     db.createFavorite({ userId: mike.id, tweetId: tweet1.id });
     db.createFavorite({ userId: mike.id, tweetId: tweet3.id });
     db.createFavorite({ userId: mike.id, tweetId: tweet4.id });
