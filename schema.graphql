@@ -1,13 +1,33 @@
+type Query {
+  currentUser: User!
+  user(id: String!): User
+  tweets: [Tweet!]
+  trends: [Trend!]
+  suggestions: [Suggestion!]
+}
+type DeletionResult {
+  deleted: [String!]
+}
+type Mutation {
+  createTweet(userId: String!, body: String!): Tweet!
+  createFavorite(tweetId: String!, userId: String!): Favorite!
+  deleteFavorite(tweetId: String!, userId: String!): Favorite!
+}
+
 type Tweet {
   id: String!
-  author: User
   body: String!
-  favorites: [Favorite!]
-  favoriteCount: Int
-  retweetCount: Int
-  commentCount: Int
   createdAt: String!
   updatedAt: String!
+  author: User
+  favorites: [Favorite!]
+  retweets: [Retweet!]
+  stats: TweetStats
+}
+type TweetStats {
+  favoriteCount: Int!
+  retweetCount: Int!
+  commentCount: Int!
 }
 
 type User {
@@ -16,15 +36,16 @@ type User {
   handle: String!
   tweets: [Tweet!]
   favorites: [Favorite!]
-  coverUrl: String
+  retweets: [Retweet!]
+  coverUrl: String!
   avatarUrl: String!
   createdAt: String!
   updatedAt: String!
   deletedAt: String
-  statistics: UserStatistics
+  stats: UserStats
 }
 
-type UserStatistics {
+type UserStats {
   user: User!
   tweetCount: Int!
   followingCount: Int!
@@ -39,16 +60,33 @@ type Favorite {
   updatedAt: String!
 }
 
-type Query {
-  currentUser: User!
-  user(id: String!): User
-  tweets: [Tweet!]
+type Retweet {
+  id: String!
+  tweet: Tweet
+  user: User
+  createdAt: String!
+  updatedAt: String!
 }
-type DeletionResult {
-  deleted: [String!]
+
+type HashtagTrend {
+  hashtag: String!
+  tweetCount: Int!
 }
-type Mutation {
-  createTweet(userId: String!, body: String!): Tweet!
-  createFavorite(tweetId: String!, userId: String!): Favorite!
-  deleteFavorite(tweetId: String!, userId: String!): Favorite!
+type TopicTrendQuote {
+  title: String!
+  description: String!
+  imageUrl: String!
+}
+type TopicTrend {
+  topic: String!
+  tweetCount: Int!
+  quote: TopicTrendQuote
+}
+union Trend = TopicTrend | HashtagTrend
+
+type Suggestion {
+  name: String!
+  handle: String!
+  avatarUrl: String!
+  reason: String!
 }

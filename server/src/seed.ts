@@ -1,32 +1,58 @@
 import Db from './db';
 
 export function seedDb(db: Db) {
+  if (db.getAllTrends().length === 0) {
+    db.createHashtagTrend({ hashtag: 'typescript', tweetCount: 9001 });
+    db.createTopicTrend(
+      { topic: 'Frontend Masters', tweetCount: 12345 },
+      {
+        description: 'Launch of new full stack TS course',
+        imageUrl: 'http://localhost:3000/static/fem_logo.png',
+        title: 'Frontend Masters',
+      }
+    );
+    db.write();
+  }
+  if (db.getAllSuggestions().length === 0) {
+    db.createSuggestion({
+      name: 'TypeScript Project',
+      handle: 'TypeScript',
+      avatarUrl: 'http://localhost:3000/static/ts-logo.png',
+      reason: 'Because you follow @MichaelLNorth',
+    });
+    db.write();
+  }
   if (db.getAllUsers().length === 0) {
-    const [_student,mike, lisa, marc, fem] = [
+    const [_student, mike, lisa, marc, fem] = [
       db.createUser({
         name: 'Stu Dent',
         handle: 'student',
-        avatarUrl: 'https://placehold.it/g/200/200',
+        avatarUrl: 'http://localhost:3000/static/egg.jpeg',
+        coverUrl: 'http://localhost:3000/static/beach.jpeg',
       }),
       db.createUser({
         name: 'Mike North',
         handle: 'michaellnorth',
         avatarUrl: 'http://localhost:3000/static/mike-north.png',
+        coverUrl: 'http://localhost:3000/static/beach.jpeg',
       }),
       db.createUser({
         name: 'Lisa Huang-North',
         handle: 'LisaHuangNorth',
         avatarUrl: 'http://localhost:3000/static/lisaychuang.png',
+        coverUrl: 'http://localhost:3000/static/beach.jpeg',
       }),
       db.createUser({
         name: 'Marc Grabanski',
         handle: '1Marc',
         avatarUrl: 'http://localhost:3000/static/1marc.jpeg',
+        coverUrl: 'http://localhost:3000/static/beach.jpeg',
       }),
       db.createUser({
         name: 'Frontend Masters',
         handle: 'FrontendMasters',
         avatarUrl: 'http://localhost:3000/static/fem_logo.png',
+        coverUrl: 'http://localhost:3000/static/beach.jpeg',
       }),
     ];
 
@@ -44,12 +70,11 @@ export function seedDb(db: Db) {
       db.createTweet({
         userId: lisa.id,
         message:
-        "@1Marc I'm having trouble logging into FEM. This is the captcha I'm being asked to solve. Seems a bit challenging http://localhost:3000/static/captcha-1.jpg ",
+          "@1Marc I'm having trouble logging into FEM. This is the captcha I'm being asked to solve. Seems a bit challenging http://localhost:3000/static/captcha-1.jpg ",
       }),
       db.createTweet({
         userId: marc.id,
-        message:
-          `@${lisa.handle} I just deployed a new version of the UI. Mind trying again?`,
+        message: `@${lisa.handle} I just deployed a new version of the UI. Mind trying again?`,
       }),
       db.createTweet({
         userId: lisa.id,

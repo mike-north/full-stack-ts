@@ -9,9 +9,11 @@ export const GET_TIMELINE_TWEETS = gql`
     tweets {
       id
       body
-      favoriteCount
-      retweetCount
-      commentCount
+      stats {
+        favoriteCount
+        retweetCount
+        commentCount
+      }
       createdAt
       favorites {
         user {
@@ -42,22 +44,28 @@ const Timeline: React.FC<TimelineProps> = ({
   if (!data) return <p>No data!</p>;
   const { tweets } = data;
   if (!tweets) return <p>No tweets!</p>;
-  console.log({ currentUserFavorites });
+
   return (
     <div id="timeline">
-      <ComposePanel currentUser={{id: currentUserId}} />
+      <ComposePanel currentUser={{ id: currentUserId }} />
       {tweets.map((t) => {
         const author = t.author;
         if (!author) throw new Error(`Tweet ${t.id} has no author!`);
         const isFavorited = currentUserFavorites.includes(t.id);
-        console.log({ isFavorited, id: t.id, body: t.body });
+
+        const { stats, id } = t;
+        const {
+          commentCount = 0,
+          favoriteCount = 0,
+          retweetCount = 0,
+        } = stats || {};
         const tweet = {
-          id: t.id,
+          id,
           isFavorited,
           author,
-          commentCount: t.commentCount || 0,
-          likeCount: t.favoriteCount || 0,
-          retweetCount: t.retweetCount || 0,
+          commentCount,
+          favoriteCount,
+          retweetCount,
           createdAt: new Date(t.createdAt),
           message: t.body,
         };

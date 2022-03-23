@@ -1,6 +1,6 @@
-import { default as Db, DbTweet, DbFavorite, DbUser } from './db';
 import { Resolvers } from 'resolvers-types.generated';
-import { favoriteTransform, tweetTransform, userTransform } from './transforms';
+import { DbFavorite, DbTweet, DbUser, default as Db } from './db';
+import { favoriteTransform, suggestionTransform, trendTransform, tweetTransform, userTransform } from './transforms';
 
 interface ResolverContext {
   currentUser?: DbUser;
@@ -31,6 +31,13 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
           return tweetTransform(t);
         });
       },
+      trends() {
+        return db.getAllTrends().map(trendTransform);
+      },
+      suggestions() {
+        return db.getAllSuggestions().map(suggestionTransform);
+      }
+
     },
     Mutation: {
       createTweet(_parent, args, context) {
@@ -55,7 +62,16 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
         return favoriteTransform(dbFavorite);
       },
     },
-
+    Trend: {
+      __resolveType(obj, _context, _info){
+        // Only Author has a name field
+        if(typeof (obj as any).hashtag === 'string'){
+          return 'HashtagTrend';
+        }
+        else return 'TopicTrend';
+        return null; // GraphQLError is thrown
+      },
+    },
     User: {
       tweets(user, _args, context) {
         const rawTweets = db.getUserTweets(user.id);
@@ -73,7 +89,7 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
           return favoriteTransform(f);
         });
       },
-      statistics(user) {
+      stats(user) {
         const dbTweets = db.getUserTweets(user.id);
         return {
           user,
@@ -110,15 +126,14 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
       },
     },
     Tweet: {
-      favoriteCount(tweet) {
+      stats(tweet) {
         const { id } = tweet;
-        return db.getFavoriteCountForTweet(id);
-      },
-      commentCount(_tweet) {
-        return 99;
-      },
-      retweetCount(_tweet) {
-        return 999;
+        return {
+          favoriteCount: db.getFavoriteCountForTweet(id),
+          retweetCount: 999,
+          commentCount: 99
+        }
+
       },
       favorites(tweet, _args, context) {
         const { id } = tweet;

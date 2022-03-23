@@ -18,9 +18,7 @@ async function main() {
   );
   watchClientBuild();
   const db = new Db(DB_FILE_PATH);
-  if (db.getAllUsers().length === 0) {
-    seedDb(db);
-  }
+  seedDb(db);
 
   app.use('/static', express.static(STATIC_ROOT_FOLDER_PATH));
   const httpServer = createServer(app);

@@ -29,6 +29,12 @@ export type Favorite = {
   user?: Maybe<User>;
 };
 
+export type HashtagTrend = {
+  __typename?: 'HashtagTrend';
+  hashtag: Scalars['String'];
+  tweetCount: Scalars['Int'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createFavorite: Favorite;
@@ -57,6 +63,8 @@ export type MutationDeleteFavoriteArgs = {
 export type Query = {
   __typename?: 'Query';
   currentUser: User;
+  suggestions?: Maybe<Array<Suggestion>>;
+  trends?: Maybe<Array<Trend>>;
   tweets?: Maybe<Array<Tweet>>;
   user?: Maybe<User>;
 };
@@ -66,36 +74,76 @@ export type QueryUserArgs = {
   id: Scalars['String'];
 };
 
+export type Retweet = {
+  __typename?: 'Retweet';
+  createdAt: Scalars['String'];
+  id: Scalars['String'];
+  tweet?: Maybe<Tweet>;
+  updatedAt: Scalars['String'];
+  user?: Maybe<User>;
+};
+
+export type Suggestion = {
+  __typename?: 'Suggestion';
+  avatarUrl: Scalars['String'];
+  handle: Scalars['String'];
+  name: Scalars['String'];
+  reason: Scalars['String'];
+};
+
+export type TopicTrend = {
+  __typename?: 'TopicTrend';
+  quote?: Maybe<TopicTrendQuote>;
+  topic: Scalars['String'];
+  tweetCount: Scalars['Int'];
+};
+
+export type TopicTrendQuote = {
+  __typename?: 'TopicTrendQuote';
+  description: Scalars['String'];
+  imageUrl: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type Trend = HashtagTrend | TopicTrend;
+
 export type Tweet = {
   __typename?: 'Tweet';
   author?: Maybe<User>;
   body: Scalars['String'];
-  commentCount?: Maybe<Scalars['Int']>;
   createdAt: Scalars['String'];
-  favoriteCount?: Maybe<Scalars['Int']>;
   favorites?: Maybe<Array<Favorite>>;
   id: Scalars['String'];
-  retweetCount?: Maybe<Scalars['Int']>;
+  retweets?: Maybe<Array<Retweet>>;
+  stats?: Maybe<TweetStats>;
   updatedAt: Scalars['String'];
+};
+
+export type TweetStats = {
+  __typename?: 'TweetStats';
+  commentCount: Scalars['Int'];
+  favoriteCount: Scalars['Int'];
+  retweetCount: Scalars['Int'];
 };
 
 export type User = {
   __typename?: 'User';
   avatarUrl: Scalars['String'];
-  coverUrl?: Maybe<Scalars['String']>;
+  coverUrl: Scalars['String'];
   createdAt: Scalars['String'];
   deletedAt?: Maybe<Scalars['String']>;
   favorites?: Maybe<Array<Favorite>>;
   handle: Scalars['String'];
   id: Scalars['String'];
   name: Scalars['String'];
-  statistics?: Maybe<UserStatistics>;
+  retweets?: Maybe<Array<Retweet>>;
+  stats?: Maybe<UserStats>;
   tweets?: Maybe<Array<Tweet>>;
   updatedAt: Scalars['String'];
 };
 
-export type UserStatistics = {
-  __typename?: 'UserStatistics';
+export type UserStats = {
+  __typename?: 'UserStats';
   followerCount: Scalars['Int'];
   followingCount: Scalars['Int'];
   tweetCount: Scalars['Int'];
@@ -105,7 +153,7 @@ export type UserStatistics = {
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, updatedAt: string, coverUrl?: string | null, favorites?: Array<{ __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null }> | null, statistics?: { __typename?: 'UserStatistics', tweetCount: number, followerCount: number, followingCount: number } | null } };
+export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, updatedAt: string, coverUrl: string, favorites?: Array<{ __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null }> | null, stats?: { __typename?: 'UserStats', tweetCount: number, followerCount: number, followingCount: number } | null }, suggestions?: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> | null, trends?: Array<{ __typename?: 'HashtagTrend', tweetCount: number, hashtag: string } | { __typename?: 'TopicTrend', tweetCount: number, topic: string, quote?: { __typename?: 'TopicTrendQuote', title: string, imageUrl: string, description: string } | null }> | null };
 
 export type CreateNewTweetMutationVariables = Exact<{
   userId: Scalars['String'];
@@ -118,7 +166,7 @@ export type CreateNewTweetMutation = { __typename?: 'Mutation', createTweet: { _
 export type GetTimelineTweetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTimelineTweetsQuery = { __typename?: 'Query', tweets?: Array<{ __typename?: 'Tweet', id: string, body: string, favoriteCount?: number | null, retweetCount?: number | null, commentCount?: number | null, createdAt: string, favorites?: Array<{ __typename?: 'Favorite', user?: { __typename?: 'User', id: string } | null }> | null, author?: { __typename?: 'User', name: string, handle: string, avatarUrl: string } | null }> | null };
+export type GetTimelineTweetsQuery = { __typename?: 'Query', tweets?: Array<{ __typename?: 'Tweet', id: string, body: string, createdAt: string, stats?: { __typename?: 'TweetStats', favoriteCount: number, retweetCount: number, commentCount: number } | null, favorites?: Array<{ __typename?: 'Favorite', user?: { __typename?: 'User', id: string } | null }> | null, author?: { __typename?: 'User', name: string, handle: string, avatarUrl: string } | null }> | null };
 
 export type CreateFavoriteMutationVariables = Exact<{
   tweetId: Scalars['String'];
@@ -152,10 +200,31 @@ export const GetCurrentUserDocument = gql`
     createdAt
     updatedAt
     coverUrl
-    statistics {
+    stats {
       tweetCount
       followerCount
       followingCount
+    }
+  }
+  suggestions {
+    name
+    handle
+    avatarUrl
+    reason
+  }
+  trends {
+    ... on TopicTrend {
+      tweetCount
+      topic
+      quote {
+        title
+        imageUrl
+        description
+      }
+    }
+    ... on HashtagTrend {
+      tweetCount
+      hashtag
     }
   }
 }
@@ -226,9 +295,11 @@ export const GetTimelineTweetsDocument = gql`
   tweets {
     id
     body
-    favoriteCount
-    retweetCount
-    commentCount
+    stats {
+      favoriteCount
+      retweetCount
+      commentCount
+    }
     createdAt
     favorites {
       user {

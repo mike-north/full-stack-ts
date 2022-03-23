@@ -32,7 +32,7 @@ export interface TweetProps {
       handle: string;
       avatarUrl: string;
     };
-    likeCount: number;
+    favoriteCount: number;
     retweetCount: number;
     commentCount: number;
   };
@@ -68,7 +68,7 @@ const Tweet: React.FC<TweetProps> = ({
     id,
     message,
     createdAt,
-    likeCount,
+    favoriteCount,
     retweetCount,
     commentCount,
     isFavorited,
@@ -128,7 +128,7 @@ const Tweet: React.FC<TweetProps> = ({
             <FontAwesomeIcon
               icon={isFavorited ? faHeartSolid : faHeartHollow}
             />{' '}
-            {humanFriendlyNumber(likeCount)}
+            {humanFriendlyNumber(favoriteCount)}
           </button>
           <button className="blue">
             <FontAwesomeIcon icon={faEllipsisH} />

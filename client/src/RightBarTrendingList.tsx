@@ -22,7 +22,7 @@ const RightBarTrendingList: React.FC<RightBarTrendingListProps> = ({
       <main>
         {trends.map((trend, index) => {
           return (
-            <a href="#" className="trend" key={index}>
+            <a href="#" className="trend" key={index} onClick={e => e.preventDefault()}>
               <div className="trend-num">
                 <span>{index + 1} - Trending</span>
               </div>

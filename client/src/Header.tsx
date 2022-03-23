@@ -7,12 +7,13 @@ export interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ currentUser }) => {
-  const { avatarUrl, name, handle, statistics, coverUrl } = currentUser;
-  const { followerCount, tweetCount, followingCount } = statistics;
+  const { avatarUrl, name, handle, stats, coverUrl } = currentUser;
+  const { followerCount = 0, tweetCount = 0, followingCount = 0 } = stats || {};
+  const backgroundUrl = coverUrl || 'http://placecorgi.com/1200/300';
   return (
     <header
       className="nav-closed"
-      style={{ backgroundImage: `url('${coverUrl}')` }}
+      style={{ backgroundImage: `url('${backgroundUrl}')` }}
     >
       <div className="wrapper">
         <div className="top">

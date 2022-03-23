@@ -19,6 +19,7 @@ export interface DbUser extends DbEntity {
   avatarUrl: string;
   handle: string;
   name: string;
+  coverUrl: string;
 }
 
 export interface DbFavorite extends DbEntity {
@@ -26,10 +27,43 @@ export interface DbFavorite extends DbEntity {
   userId: string;
 }
 
+export interface DbHashtagTrend {
+  id: string;
+  kind: 'hashtag';
+  hashtag: string;
+  tweetCount: number;
+}
+export interface DbTopicTrendQuote {
+  id: string;
+  topicTrendId: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+export interface DbTopicTrend {
+  id: string;
+  kind: 'topic';
+  topic: string;
+  tweetCount: number;
+  quote?: DbTopicTrendQuote;
+}
+export type DbTrend = DbTopicTrend | DbHashtagTrend;
+export interface DbSuggestion {
+  id: string;
+  name: string;
+  handle: string;
+  avatarUrl: string;
+  reason: string;
+}
+
 export interface DbSchema {
   tweets: DbTweet[];
   users: DbUser[];
   favorites: DbFavorite[];
+  hashtagTrends: DbHashtagTrend[];
+  suggestions: DbSuggestion[];
+  topicTrends: DbTopicTrend[];
+  topicTrendQuotes: DbTopicTrendQuote[];
 }
 
 class Db {
@@ -40,7 +74,17 @@ class Db {
     this.adapter = new FileSync<DbSchema>(filePath);
     this.db = low(this.adapter);
     this.db.read();
-    this.db.defaults({ tweets: [], users: [], favorites: [] }).write();
+    this.db
+      .defaults<DbSchema>({
+        tweets: [],
+        users: [],
+        favorites: [],
+        hashtagTrends: [],
+        topicTrends: [],
+        topicTrendQuotes: [],
+        suggestions: [],
+      })
+      .write();
   }
 
   getFirstUser(): DbUser {
@@ -82,6 +126,32 @@ class Db {
       .value();
   }
 
+  getAllTrends(): DbTrend[] {
+    const hashTrends = this.db.get('hashtagTrends').reverse().value();
+    const topicTrends = this.db.get('topicTrends').reverse().value();
+    const topicTrendQuotes = this.db
+      .get('topicTrendQuotes')
+      .reverse()
+      .value()
+      .reduce((acc, item) => {
+        acc[item.topicTrendId] = item;
+        return acc;
+      }, {} as Record<string, DbTopicTrendQuote>);
+
+    const list = [
+      ...hashTrends,
+      ...topicTrends.map((tt) => {
+        const quote = topicTrendQuotes[tt.id];
+        return { ...tt, quote };
+      }),
+    ].sort((t) => t.tweetCount);
+    return list;
+  }
+
+  getAllSuggestions() {
+    return this.db.get('suggestions').value();
+  }
+
   getFavoritesForTweet(tweetId: string): DbFavorite[] {
     return this.db
       .get('favorites')
@@ -90,6 +160,55 @@ class Db {
   }
   getFavoriteCountForTweet(tweetId: string): number {
     return this.getFavoritesForTweet(tweetId).length;
+  }
+  createSuggestion(
+    trendProps: Pick<DbSuggestion, 'avatarUrl' | 'handle' | 'name' | 'reason'>
+  ): DbSuggestion {
+    const suggestions = this.db.get('suggestions');
+    const newSuggestion: DbSuggestion = {
+      ...trendProps,
+      id: `suggestion-${uuid()}`,
+    };
+    suggestions.push(newSuggestion).write();
+    return newSuggestion;
+  }
+  createHashtagTrend(
+    trendProps: Pick<DbHashtagTrend, 'tweetCount' | 'hashtag'>
+  ): DbHashtagTrend {
+    const hashtagTrends = this.db.get('hashtagTrends');
+    const newTrend: DbHashtagTrend = {
+      ...trendProps,
+      kind: 'hashtag',
+      id: `hashtrend-${uuid()}`,
+    };
+    hashtagTrends.push(newTrend).write();
+    return newTrend;
+  }
+  createTopicTrend(
+    trendProps: Pick<DbTopicTrend, 'topic' | 'tweetCount'>,
+    quoteProps?: Pick<DbTopicTrendQuote, 'title' | 'imageUrl' | 'description'>
+  ): DbTopicTrend {
+    const topicTrends = this.db.get('topicTrends');
+    const newTrend: DbTopicTrend = {
+      ...trendProps,
+      kind: 'topic',
+      id: `topictrend-${uuid()}`,
+    };
+    topicTrends.push(newTrend).write();
+    if (quoteProps) {
+      const { title, description, imageUrl } = quoteProps;
+      const topicTrendQuotes = this.db.get('topicTrendQuotes');
+      const newQuote: DbTopicTrendQuote = {
+        ...trendProps,
+        title,
+        description,
+        imageUrl,
+        topicTrendId: newTrend.id,
+        id: `topictrendquote-${uuid()}`,
+      };
+      topicTrendQuotes.push(newQuote).write();
+    }
+    return newTrend;
   }
 
   createTweet(tweetProps: Pick<DbTweet, 'message' | 'userId'>): DbTweet {
@@ -104,7 +223,7 @@ class Db {
     return tweet;
   }
 
-  createUser(userProps: Pick<DbUser, 'name' | 'handle' | 'avatarUrl'>): DbUser {
+  createUser(userProps: Pick<DbUser, 'name' | 'handle' | 'avatarUrl' | 'coverUrl'>): DbUser {
     const users = this.db.get('users');
     let user: DbUser = {
       ...userProps,
