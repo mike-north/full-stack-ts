@@ -5,8 +5,6 @@ import LeftSidebar from './LeftSidebar';
 import RightBar from './RightBar';
 import Timeline from './Timeline';
 
-// Source https://codepen.io/Gibbu/pen/dZBBZO
-
 const CURRENT_USER = {
   name: 'Stu Dent',
   handle: 'student',
@@ -53,8 +51,6 @@ const SUGGESTIONS = [
 ];
 
 const App: React.FC = () => {
-  // const { currentUser, trends, suggestions } = data;
-
   const { favorites: rawFavorites } = CURRENT_USER;
   const favorites = (rawFavorites || [])
     .map((f) => f.tweet?.id)
