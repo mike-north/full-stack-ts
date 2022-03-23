@@ -128,6 +128,10 @@ class Db {
       .value();
   }
 
+  getAllFavorites(): DbFavorite[] {
+    return this.db.get('favorites').value();
+  }
+
   getAllTrends(): DbTrend[] {
     const hashTrends = this.db.get('hashtagTrends').reverse().value();
     const topicTrends = this.db.get('topicTrends').reverse().value();
