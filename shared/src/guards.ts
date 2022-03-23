@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access */
 import { HashtagTrend } from './client-types';
 
 export function isDefined<T>(arg: T | undefined): arg is T {

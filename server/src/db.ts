@@ -74,7 +74,9 @@ class Db {
     this.adapter = new FileSync<DbSchema>(filePath);
     this.db = low(this.adapter);
     this.db.read();
-    this.db
+  }
+  async initDefaults() {
+    return await this.db
       .defaults<DbSchema>({
         tweets: [],
         users: [],
@@ -161,40 +163,40 @@ class Db {
   getFavoriteCountForTweet(tweetId: string): number {
     return this.getFavoritesForTweet(tweetId).length;
   }
-  createSuggestion(
+  async createSuggestion(
     trendProps: Pick<DbSuggestion, 'avatarUrl' | 'handle' | 'name' | 'reason'>
-  ): DbSuggestion {
+  ): Promise<DbSuggestion> {
     const suggestions = this.db.get('suggestions');
     const newSuggestion: DbSuggestion = {
       ...trendProps,
       id: `suggestion-${uuid()}`,
     };
-    suggestions.push(newSuggestion).write();
+    await suggestions.push(newSuggestion).write();
     return newSuggestion;
   }
-  createHashtagTrend(
+  async createHashtagTrend(
     trendProps: Pick<DbHashtagTrend, 'tweetCount' | 'hashtag'>
-  ): DbHashtagTrend {
+  ): Promise<DbHashtagTrend> {
     const hashtagTrends = this.db.get('hashtagTrends');
     const newTrend: DbHashtagTrend = {
       ...trendProps,
       kind: 'hashtag',
       id: `hashtrend-${uuid()}`,
     };
-    hashtagTrends.push(newTrend).write();
+    await hashtagTrends.push(newTrend).write();
     return newTrend;
   }
-  createTopicTrend(
+  async createTopicTrend(
     trendProps: Pick<DbTopicTrend, 'topic' | 'tweetCount'>,
     quoteProps?: Pick<DbTopicTrendQuote, 'title' | 'imageUrl' | 'description'>
-  ): DbTopicTrend {
+  ): Promise<DbTopicTrend> {
     const topicTrends = this.db.get('topicTrends');
     const newTrend: DbTopicTrend = {
       ...trendProps,
       kind: 'topic',
       id: `topictrend-${uuid()}`,
     };
-    topicTrends.push(newTrend).write();
+    await topicTrends.push(newTrend).write();
     if (quoteProps) {
       const { title, description, imageUrl } = quoteProps;
       const topicTrendQuotes = this.db.get('topicTrendQuotes');
@@ -206,12 +208,14 @@ class Db {
         topicTrendId: newTrend.id,
         id: `topictrendquote-${uuid()}`,
       };
-      topicTrendQuotes.push(newQuote).write();
+      await topicTrendQuotes.push(newQuote).write();
     }
     return newTrend;
   }
 
-  createTweet(tweetProps: Pick<DbTweet, 'message' | 'userId'>): DbTweet {
+  async createTweet(
+    tweetProps: Pick<DbTweet, 'message' | 'userId'>
+  ): Promise<DbTweet> {
     const tweets = this.db.get('tweets');
     const tweet: DbTweet = {
       ...tweetProps,
@@ -219,44 +223,44 @@ class Db {
       updatedAt: new Date().toISOString(),
       id: `tweet-${uuid()}`,
     };
-    tweets.push(tweet).write();
+    await tweets.push(tweet).write();
     return tweet;
   }
 
-  createUser(
+  async createUser(
     userProps: Pick<DbUser, 'name' | 'handle' | 'avatarUrl' | 'coverUrl'>
-  ): DbUser {
+  ): Promise<DbUser> {
     const users = this.db.get('users');
-    let user: DbUser = {
+    const user: DbUser = {
       ...userProps,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       id: `user-${uuid()}`,
     };
-    users.push(user).write();
+    await users.push(user).write();
     return user;
   }
 
-  createFavorite(
+  async createFavorite(
     favoriteProps: Pick<DbFavorite, 'tweetId' | 'userId'>
-  ): DbFavorite {
+  ): Promise<DbFavorite> {
     const user = this.getUserById(favoriteProps.userId);
     const tweet = this.getTweetById(favoriteProps.tweetId);
     if (!user) throw new Error('User does not exist');
     if (!tweet) throw new Error('Tweet does not exist');
     const favorites = this.db.get('favorites');
-    let favorite: DbFavorite = {
+    const favorite: DbFavorite = {
       ...favoriteProps,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       id: `favorite-${uuid()}`,
     };
-    favorites.push(favorite).write();
+    await favorites.push(favorite).write();
     return favorite;
   }
-  deleteFavorite(
+  async deleteFavorite(
     favoriteProps: Pick<DbFavorite, 'tweetId' | 'userId'>
-  ): DbFavorite {
+  ): Promise<DbFavorite> {
     const user = this.getUserById(favoriteProps.userId);
     const tweet = this.getTweetById(favoriteProps.tweetId);
     if (!user) throw new Error('User does not exist');
@@ -267,7 +271,7 @@ class Db {
       (f) => f.tweetId === tweet.id && f.userId === user.id
     );
 
-    this.db.write();
+    await this.db.write();
     return deleted.first().value();
   }
 
@@ -279,8 +283,8 @@ class Db {
     return this.db.get('users').value();
   }
 
-  write(): void {
-    this.db.write();
+  async write(): Promise<void> {
+    await this.db.write();
   }
 }
 

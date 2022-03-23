@@ -7,8 +7,8 @@ import {
   faHashtag,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DetailedUser } from '@full-stack-ts/shared';
 import * as React from 'react';
+import { DetailedUser } from './Header';
 
 export interface LeftSidebarProps {
   currentUser: DetailedUser;

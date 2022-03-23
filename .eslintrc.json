@@ -1,0 +1,61 @@
+{
+  "env": {
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "settings": {
+    "node": {
+      "tryExtensions": [".js", ".json", ".node", ".ts"]
+    }
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "ignorePatterns": ["**/node_modules/", "**/dist/"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off"
+  },
+  "overrides": [
+    {
+      "files": "client/**/*.tsx?",
+      "rules": { "react/prop-types": "off" },
+      "extends": ["plugin:react/recommended"],
+      "plugins": ["react", "@typescript-eslint"],
+      "parserOptions": {
+        "project": "./client/tsconfig.json"
+      },
+      "env": { "browser": true }
+    },
+    {
+      "files": "server/**/*.ts",
+      "extends": ["plugin:node/recommended"],
+      "parserOptions": {
+        "project": "./server/tsconfig.json"
+      },
+      "env": { "node": true },
+      "rules": {
+        "node/no-unsupported-features/es-syntax": [
+          "error",
+          { "ignores": ["modules"] }
+        ]
+      }
+    },
+    {
+      "files": "shared/**/*.ts",
+      "parserOptions": {
+        "project": "./shared/tsconfig.json"
+      }
+    }
+  ]
+}

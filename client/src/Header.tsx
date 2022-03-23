@@ -1,6 +1,11 @@
 import * as React from 'react';
 import CurrentUserSummary from './CurrentUserSummary';
-import { DetailedUser } from '@full-stack-ts/shared';
+import { User, UserStatistics } from '@full-stack-ts/shared';
+
+export interface DetailedUser extends User {
+  coverUrl?: string | null;
+  stats: UserStatistics;
+}
 
 export interface HeaderProps {
   currentUser: DetailedUser;

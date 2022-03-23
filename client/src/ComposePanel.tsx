@@ -10,18 +10,17 @@ import * as React from 'react';
 export interface ComposePanelProps {
   currentUser: { id: string };
 }
-
 const ComposePanel: React.FC<ComposePanelProps> = ({ currentUser }) => {
-  async function createNewTweet(body: string) {
+  function createNewTweet(body: string) {
     console.log('creating new tweet', { body, currentUser });
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const textarea = e.currentTarget.querySelector('textarea');
     if (!textarea) throw new Error('No textarea found');
     const body = textarea.value;
-    await createNewTweet(body);
+    createNewTweet(body);
     textarea.value = '';
   };
   return (

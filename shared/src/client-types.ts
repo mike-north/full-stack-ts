@@ -42,7 +42,7 @@ export interface Suggestion {
   avatarUrl: string;
   reason: string;
 }
-export interface RightBarSearchProps {}
+
 export interface UserSearchResult {
   name: string;
   handle: string;

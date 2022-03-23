@@ -16,7 +16,8 @@ async function main() {
   );
   watchClientBuild();
   const db = new Db(DB_FILE_PATH);
-  seedDb(db);
+  await db.initDefaults()
+  await seedDb(db);
 
   app.use('/static', express.static(STATIC_ROOT_FOLDER_PATH));
 
@@ -25,9 +26,7 @@ async function main() {
       console.log(
         [
           chalk.bgMagentaBright.black.bold(' API listening on   '),
-          chalk.bgWhite.black(
-            '\thttp://localhost:' + PORT
-          ),
+          chalk.bgWhite.black(`\thttp://localhost:${PORT}`),
         ].join(' ')
       );
       resolve();
@@ -35,4 +34,6 @@ async function main() {
   );
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+});
