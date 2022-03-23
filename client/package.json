@@ -8,7 +8,7 @@
     "dev": "yarn parcel src/index.html",
     "test": "echo 'no client-side tests yet'",
     "type-check": "tsc -p .",
-    "build": "yarn type-check && yarn parcel build  --dist-dir dist src/index.html",
+    "build": "yarn parcel build  --dist-dir dist src/index.html",
     "codegen": "graphql-codegen --config codegen.yml",
     "clean": "yarn rimraf dist"
   },

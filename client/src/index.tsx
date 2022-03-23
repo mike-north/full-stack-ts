@@ -18,6 +18,18 @@ const ErrorFallback: React.ComponentType<FallbackProps> = ({
   );
 };
 
+declare global {
+  interface NodeModule {
+    hot: {
+      accept(cb?: () => void): void
+    }
+  }
+}
+
+if (module.hot) {
+  module.hot.accept();
+}
+
 ReactDOM.render(
   <ErrorBoundary
     FallbackComponent={ErrorFallback}
