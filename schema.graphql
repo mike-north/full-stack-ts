@@ -5,7 +5,15 @@ type Query {
 }
 type Mutation {
   createTweet(userId: String!, body: String!): Tweet!
+  createFavorite(favorite: FavoriteInput!): Favorite!
+  deleteFavorite(favorite: FavoriteInput!): Favorite!
 }
+
+input FavoriteInput {
+  userId: String!
+  tweetId: String!
+}
+
 type User {
   id: String!
   name: String!

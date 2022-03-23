@@ -1,39 +1,39 @@
 {
   "tweets": [
     {
-      "userId": "user-16ee50d0-e43c-4e95-8ae7-b02d086785f5",
+      "userId": "user-9fb57032-2aed-4be0-aff3-74fae06e79b0",
       "message": "Hey, check this out! https://www.youtube.com/embed/Q1owo3t6CZ8",
-      "createdAt": "2022-03-23T03:55:59.613Z",
-      "updatedAt": "2022-03-23T03:55:59.613Z",
-      "id": "tweet-97fa3005-a0ec-4e42-8f53-9b3cec7c8316"
+      "createdAt": "2022-03-23T21:35:15.301Z",
+      "updatedAt": "2022-03-23T21:35:15.301Z",
+      "id": "tweet-cc1bccf7-ec31-40fc-a8a8-fa7e23210770"
     },
     {
-      "userId": "user-895b3d36-8bdf-4c29-be10-7a5e7ff3287f",
+      "userId": "user-2577c791-4908-4ec1-8fff-fe40e0eb57a6",
       "message": "Check out Mike's story -- new on the FEM youtube channel! https://www.youtube.com/embed/j02UgcixOU0",
-      "createdAt": "2022-03-23T03:55:59.613Z",
-      "updatedAt": "2022-03-23T03:55:59.613Z",
-      "id": "tweet-ccf7f922-f668-4da1-93a7-07adce2f0d80"
+      "createdAt": "2022-03-23T21:35:15.301Z",
+      "updatedAt": "2022-03-23T21:35:15.301Z",
+      "id": "tweet-38104c0f-eb68-4f43-bd1c-c00dc244d7e0"
     },
     {
-      "userId": "user-22a58535-53c1-4acd-b762-4160d7d232df",
+      "userId": "user-1c3b0b7f-d9be-4682-b374-7adf94da93f0",
       "message": "@1Marc I'm having trouble logging into FEM. This is the captcha I'm being asked to solve. Seems a bit challenging http://localhost:3000/static/captcha-1.jpg ",
-      "createdAt": "2022-03-23T03:55:59.613Z",
-      "updatedAt": "2022-03-23T03:55:59.613Z",
-      "id": "tweet-66165885-99a8-4645-9b1c-f1bb0d87bb35"
+      "createdAt": "2022-03-23T21:35:15.301Z",
+      "updatedAt": "2022-03-23T21:35:15.301Z",
+      "id": "tweet-faccc93f-74d9-4734-8724-a87bb68db295"
     },
     {
-      "userId": "user-895b3d36-8bdf-4c29-be10-7a5e7ff3287f",
+      "userId": "user-2577c791-4908-4ec1-8fff-fe40e0eb57a6",
       "message": "@LisaHuangNorth I just deployed a new version of the UI. Mind trying again?",
-      "createdAt": "2022-03-23T03:55:59.614Z",
-      "updatedAt": "2022-03-23T03:55:59.614Z",
-      "id": "tweet-0db3e976-92cc-4846-9b96-e2a03da0b4e2"
+      "createdAt": "2022-03-23T21:35:15.302Z",
+      "updatedAt": "2022-03-23T21:35:15.302Z",
+      "id": "tweet-8bfede2c-dea8-4ddf-a161-4d51a8543e90"
     },
     {
-      "userId": "user-22a58535-53c1-4acd-b762-4160d7d232df",
+      "userId": "user-1c3b0b7f-d9be-4682-b374-7adf94da93f0",
       "message": "@FrontendMasters I'm still having trouble with the login captchas. Am I supposed to take a class before solving this one? http://localhost:3000/static/captcha-4.jpg",
-      "createdAt": "2022-03-23T03:55:59.614Z",
-      "updatedAt": "2022-03-23T03:55:59.614Z",
-      "id": "tweet-1220baa2-2092-4ed8-a72c-91757dc508f7"
+      "createdAt": "2022-03-23T21:35:15.302Z",
+      "updatedAt": "2022-03-23T21:35:15.302Z",
+      "id": "tweet-84ac7ace-b06c-4171-83e8-6f1d0bb6b1a0"
     }
   ],
   "users": [
@@ -42,110 +42,110 @@
       "handle": "student",
       "avatarUrl": "http://localhost:3000/static/egg.jpeg",
       "coverUrl": "http://localhost:3000/static/beach.jpeg",
-      "createdAt": "2022-03-23T03:55:59.612Z",
-      "updatedAt": "2022-03-23T03:55:59.612Z",
-      "id": "user-15a37948-7712-4e0b-a554-2fef33f31697"
+      "createdAt": "2022-03-23T21:35:15.300Z",
+      "updatedAt": "2022-03-23T21:35:15.300Z",
+      "id": "user-b84f5bf7-4ff0-4e32-b865-5f4d176656bf"
     },
     {
       "name": "Mike North",
       "handle": "michaellnorth",
       "avatarUrl": "http://localhost:3000/static/mike-north.png",
       "coverUrl": "http://localhost:3000/static/beach.jpeg",
-      "createdAt": "2022-03-23T03:55:59.612Z",
-      "updatedAt": "2022-03-23T03:55:59.612Z",
-      "id": "user-71dea2f6-be96-4706-bf6a-1e1c470d6db7"
+      "createdAt": "2022-03-23T21:35:15.300Z",
+      "updatedAt": "2022-03-23T21:35:15.300Z",
+      "id": "user-798dbdbd-444b-4454-9b05-4a5f56d90241"
     },
     {
       "name": "Lisa Huang-North",
       "handle": "LisaHuangNorth",
       "avatarUrl": "http://localhost:3000/static/lisaychuang.png",
       "coverUrl": "http://localhost:3000/static/beach.jpeg",
-      "createdAt": "2022-03-23T03:55:59.612Z",
-      "updatedAt": "2022-03-23T03:55:59.612Z",
-      "id": "user-22a58535-53c1-4acd-b762-4160d7d232df"
+      "createdAt": "2022-03-23T21:35:15.300Z",
+      "updatedAt": "2022-03-23T21:35:15.300Z",
+      "id": "user-1c3b0b7f-d9be-4682-b374-7adf94da93f0"
     },
     {
       "name": "Marc Grabanski",
       "handle": "1Marc",
       "avatarUrl": "http://localhost:3000/static/1marc.jpeg",
       "coverUrl": "http://localhost:3000/static/beach.jpeg",
-      "createdAt": "2022-03-23T03:55:59.612Z",
-      "updatedAt": "2022-03-23T03:55:59.612Z",
-      "id": "user-895b3d36-8bdf-4c29-be10-7a5e7ff3287f"
+      "createdAt": "2022-03-23T21:35:15.300Z",
+      "updatedAt": "2022-03-23T21:35:15.300Z",
+      "id": "user-2577c791-4908-4ec1-8fff-fe40e0eb57a6"
     },
     {
       "name": "Frontend Masters",
       "handle": "FrontendMasters",
       "avatarUrl": "http://localhost:3000/static/fem_logo.png",
       "coverUrl": "http://localhost:3000/static/beach.jpeg",
-      "createdAt": "2022-03-23T03:55:59.613Z",
-      "updatedAt": "2022-03-23T03:55:59.613Z",
-      "id": "user-16ee50d0-e43c-4e95-8ae7-b02d086785f5"
+      "createdAt": "2022-03-23T21:35:15.301Z",
+      "updatedAt": "2022-03-23T21:35:15.301Z",
+      "id": "user-9fb57032-2aed-4be0-aff3-74fae06e79b0"
     }
   ],
   "favorites": [
     {
-      "userId": "user-15a37948-7712-4e0b-a554-2fef33f31697",
-      "tweetId": "tweet-1220baa2-2092-4ed8-a72c-91757dc508f7",
-      "createdAt": "2022-03-23T03:55:59.614Z",
-      "updatedAt": "2022-03-23T03:55:59.614Z",
-      "id": "favorite-9316e670-8b51-455c-90a9-ce42f20f4b62"
+      "userId": "user-9fb57032-2aed-4be0-aff3-74fae06e79b0",
+      "tweetId": "tweet-38104c0f-eb68-4f43-bd1c-c00dc244d7e0",
+      "createdAt": "2022-03-23T21:35:15.303Z",
+      "updatedAt": "2022-03-23T21:35:15.303Z",
+      "id": "favorite-e120f72e-a0ff-4de6-a9fa-48fa0441464a"
     },
     {
-      "userId": "user-16ee50d0-e43c-4e95-8ae7-b02d086785f5",
-      "tweetId": "tweet-0db3e976-92cc-4846-9b96-e2a03da0b4e2",
-      "createdAt": "2022-03-23T03:55:59.615Z",
-      "updatedAt": "2022-03-23T03:55:59.615Z",
-      "id": "favorite-e4859379-b5ce-49d3-978c-a54b3de4ea7e"
+      "userId": "user-9fb57032-2aed-4be0-aff3-74fae06e79b0",
+      "tweetId": "tweet-8bfede2c-dea8-4ddf-a161-4d51a8543e90",
+      "createdAt": "2022-03-23T21:35:15.303Z",
+      "updatedAt": "2022-03-23T21:35:15.303Z",
+      "id": "favorite-02e38b61-d76e-4477-ac9d-cea6e6a18218"
     },
     {
-      "userId": "user-895b3d36-8bdf-4c29-be10-7a5e7ff3287f",
-      "tweetId": "tweet-ccf7f922-f668-4da1-93a7-07adce2f0d80",
-      "createdAt": "2022-03-23T03:55:59.615Z",
-      "updatedAt": "2022-03-23T03:55:59.615Z",
-      "id": "favorite-41abe22e-3875-44fd-a038-6d2a84380d49"
+      "userId": "user-2577c791-4908-4ec1-8fff-fe40e0eb57a6",
+      "tweetId": "tweet-38104c0f-eb68-4f43-bd1c-c00dc244d7e0",
+      "createdAt": "2022-03-23T21:35:15.303Z",
+      "updatedAt": "2022-03-23T21:35:15.303Z",
+      "id": "favorite-fad529a4-96b4-41ed-a4a2-9b155f2acb83"
     },
     {
-      "userId": "user-895b3d36-8bdf-4c29-be10-7a5e7ff3287f",
-      "tweetId": "tweet-0db3e976-92cc-4846-9b96-e2a03da0b4e2",
-      "createdAt": "2022-03-23T03:55:59.615Z",
-      "updatedAt": "2022-03-23T03:55:59.615Z",
-      "id": "favorite-3d17bc41-ed75-4d38-8434-2ba7b5ab12cd"
+      "userId": "user-2577c791-4908-4ec1-8fff-fe40e0eb57a6",
+      "tweetId": "tweet-8bfede2c-dea8-4ddf-a161-4d51a8543e90",
+      "createdAt": "2022-03-23T21:35:15.303Z",
+      "updatedAt": "2022-03-23T21:35:15.303Z",
+      "id": "favorite-67a698e4-7b59-4516-9057-af882131128d"
     },
     {
-      "userId": "user-71dea2f6-be96-4706-bf6a-1e1c470d6db7",
-      "tweetId": "tweet-97fa3005-a0ec-4e42-8f53-9b3cec7c8316",
-      "createdAt": "2022-03-23T03:55:59.616Z",
-      "updatedAt": "2022-03-23T03:55:59.616Z",
-      "id": "favorite-422232b4-698f-4db8-8dc8-c884a5d851fa"
+      "userId": "user-798dbdbd-444b-4454-9b05-4a5f56d90241",
+      "tweetId": "tweet-cc1bccf7-ec31-40fc-a8a8-fa7e23210770",
+      "createdAt": "2022-03-23T21:35:15.304Z",
+      "updatedAt": "2022-03-23T21:35:15.304Z",
+      "id": "favorite-c35c88d3-1a61-4483-a06b-c4295e280ba1"
     },
     {
-      "userId": "user-71dea2f6-be96-4706-bf6a-1e1c470d6db7",
-      "tweetId": "tweet-66165885-99a8-4645-9b1c-f1bb0d87bb35",
-      "createdAt": "2022-03-23T03:55:59.616Z",
-      "updatedAt": "2022-03-23T03:55:59.616Z",
-      "id": "favorite-902ff18e-d92a-460a-80d0-5e11deb6877d"
+      "userId": "user-798dbdbd-444b-4454-9b05-4a5f56d90241",
+      "tweetId": "tweet-faccc93f-74d9-4734-8724-a87bb68db295",
+      "createdAt": "2022-03-23T21:35:15.304Z",
+      "updatedAt": "2022-03-23T21:35:15.304Z",
+      "id": "favorite-6aecc01e-2627-410a-9292-8eba875a919f"
     },
     {
-      "userId": "user-71dea2f6-be96-4706-bf6a-1e1c470d6db7",
-      "tweetId": "tweet-0db3e976-92cc-4846-9b96-e2a03da0b4e2",
-      "createdAt": "2022-03-23T03:55:59.616Z",
-      "updatedAt": "2022-03-23T03:55:59.616Z",
-      "id": "favorite-8425749f-870d-494f-ba6c-09e7fec8edb0"
+      "userId": "user-798dbdbd-444b-4454-9b05-4a5f56d90241",
+      "tweetId": "tweet-8bfede2c-dea8-4ddf-a161-4d51a8543e90",
+      "createdAt": "2022-03-23T21:35:15.304Z",
+      "updatedAt": "2022-03-23T21:35:15.304Z",
+      "id": "favorite-7afbef5c-0286-4535-96d3-f40cd5367133"
     },
     {
-      "userId": "user-22a58535-53c1-4acd-b762-4160d7d232df",
-      "tweetId": "tweet-ccf7f922-f668-4da1-93a7-07adce2f0d80",
-      "createdAt": "2022-03-23T03:55:59.616Z",
-      "updatedAt": "2022-03-23T03:55:59.616Z",
-      "id": "favorite-2d59a585-b520-4dab-9edd-8d22edc077d7"
+      "userId": "user-1c3b0b7f-d9be-4682-b374-7adf94da93f0",
+      "tweetId": "tweet-38104c0f-eb68-4f43-bd1c-c00dc244d7e0",
+      "createdAt": "2022-03-23T21:35:15.304Z",
+      "updatedAt": "2022-03-23T21:35:15.304Z",
+      "id": "favorite-4d983450-fefd-4a7a-805e-618d0ae72217"
     },
     {
-      "userId": "user-22a58535-53c1-4acd-b762-4160d7d232df",
-      "tweetId": "tweet-0db3e976-92cc-4846-9b96-e2a03da0b4e2",
-      "createdAt": "2022-03-23T03:55:59.617Z",
-      "updatedAt": "2022-03-23T03:55:59.617Z",
-      "id": "favorite-a4e781ad-1c7b-4e62-b9dd-66b4e36e390b"
+      "userId": "user-1c3b0b7f-d9be-4682-b374-7adf94da93f0",
+      "tweetId": "tweet-8bfede2c-dea8-4ddf-a161-4d51a8543e90",
+      "createdAt": "2022-03-23T21:35:15.305Z",
+      "updatedAt": "2022-03-23T21:35:15.305Z",
+      "id": "favorite-fe1695b8-9c69-4f93-a631-99a469c0dad7"
     }
   ],
   "hashtagTrends": [
@@ -153,7 +153,7 @@
       "hashtag": "typescript",
       "tweetCount": 9001,
       "kind": "hashtag",
-      "id": "hashtrend-7d9aaca2-0cd7-4c2b-bec2-517c1eb8f94f"
+      "id": "hashtrend-1a80d060-8af1-490b-aaaa-2a9fb74b115f"
     }
   ],
   "topicTrends": [
@@ -161,13 +161,13 @@
       "topic": "Frontend Masters",
       "tweetCount": 12345,
       "kind": "topic",
-      "id": "topictrend-4f992d65-e229-48f2-b523-2faba1343f3e"
+      "id": "topictrend-b9b11f15-98ac-4441-992f-98678fb1690d"
     },
     {
       "topic": "Pointless Suggestions",
       "tweetCount": 999,
       "kind": "topic",
-      "id": "topictrend-73f3c816-b1fc-456d-8c45-beb9c657a663"
+      "id": "topictrend-1501e690-48d1-487a-92d9-2ce035d3323f"
     }
   ],
   "topicTrendQuotes": [
@@ -177,8 +177,8 @@
       "title": "Frontend Masters",
       "description": "Launch of new full stack TS course",
       "imageUrl": "http://localhost:3000/static/fem_logo.png",
-      "topicTrendId": "topictrend-4f992d65-e229-48f2-b523-2faba1343f3e",
-      "id": "topictrendquote-43d669bc-885b-4012-a4e6-653e38a6c521"
+      "topicTrendId": "topictrend-b9b11f15-98ac-4441-992f-98678fb1690d",
+      "id": "topictrendquote-4c1f08a5-58a0-4b4f-bb21-0b15ac24ff19"
     },
     {
       "topic": "Pointless Suggestions",
@@ -186,8 +186,8 @@
       "title": "clippy",
       "description": "It looks like you're trying to write a letter...",
       "imageUrl": "http://localhost:3000/static/clippy-logo.jpeg",
-      "topicTrendId": "topictrend-73f3c816-b1fc-456d-8c45-beb9c657a663",
-      "id": "topictrendquote-d0e1ba0a-fa05-400a-9b94-7403b82ab0f4"
+      "topicTrendId": "topictrend-1501e690-48d1-487a-92d9-2ce035d3323f",
+      "id": "topictrendquote-f69e9c28-f45c-49c0-8caf-b53e75a6bdc0"
     }
   ],
   "suggestions": [
@@ -196,28 +196,28 @@
       "handle": "TypeScript",
       "avatarUrl": "http://localhost:3000/static/ts-logo.png",
       "reason": "Because you follow @MichaelLNorth",
-      "id": "suggestion-4b0f483f-23b2-4bd3-8fa4-a29980325144"
+      "id": "suggestion-fcdfd23d-aaaf-4afb-adfa-7eec61a8c0d9"
     },
     {
       "name": "jQuery",
       "handle": "jquery",
       "avatarUrl": "http://localhost:3000/static/jquery-logo.jpeg",
       "reason": "Because you follow @FrontendMasters",
-      "id": "suggestion-099c6f09-83af-4c95-937d-8d56b6791b3d"
+      "id": "suggestion-43159598-aabd-4237-aff6-f90ccbc44fd9"
     },
     {
       "name": "GitHub",
       "handle": "github",
       "avatarUrl": "http://localhost:3000/static/github-logo.jpeg",
       "reason": "Because you follow @MichaelLNorth",
-      "id": "suggestion-fd8233ad-9e95-4b55-8177-ffffab6aba5e"
+      "id": "suggestion-043fc35a-682a-4fed-b2a5-d9c99cb78736"
     },
     {
       "name": "Microsoft",
       "handle": "ms",
       "avatarUrl": "http://localhost:3000/static/msft-logo.png",
       "reason": "Because you follow @lisaychuang",
-      "id": "suggestion-456ba8ce-68b4-4253-ad67-12933bd7795f"
+      "id": "suggestion-876548a5-4d45-47b5-b0ed-f2cc596be775"
     }
   ]
 }
