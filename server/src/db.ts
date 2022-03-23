@@ -144,7 +144,7 @@ class Db {
         const quote = topicTrendQuotes[tt.id];
         return { ...tt, quote };
       }),
-    ].sort((t) => t.tweetCount);
+    ].sort((a, b) => b.tweetCount - a.tweetCount);
     return list;
   }
 
@@ -223,7 +223,9 @@ class Db {
     return tweet;
   }
 
-  createUser(userProps: Pick<DbUser, 'name' | 'handle' | 'avatarUrl' | 'coverUrl'>): DbUser {
+  createUser(
+    userProps: Pick<DbUser, 'name' | 'handle' | 'avatarUrl' | 'coverUrl'>
+  ): DbUser {
     const users = this.db.get('users');
     let user: DbUser = {
       ...userProps,

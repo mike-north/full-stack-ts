@@ -76,16 +76,20 @@ const Tweet: React.FC<TweetProps> = ({
   },
   currentUserId,
 }) => {
-  const [createFavorite, { error: createFavoriteError }] =
-    useCreateFavoriteMutation({
-      variables: { tweetId: id, userId: currentUserId },
-      refetchQueries: [GET_TIMELINE_TWEETS, GET_CURRENT_USER],
-    });
-  const [deleteFavorite, { error: deleteFavoriteError }] =
-    useDeleteFavoriteMutation({
-      variables: { tweetId: id, userId: currentUserId },
-      refetchQueries: [GET_TIMELINE_TWEETS, GET_CURRENT_USER],
-    });
+  const [
+    createFavorite,
+    { error: createFavoriteError },
+  ] = useCreateFavoriteMutation({
+    variables: { tweetId: id, userId: currentUserId },
+    refetchQueries: [GET_TIMELINE_TWEETS, GET_CURRENT_USER],
+  });
+  const [
+    deleteFavorite,
+    { error: deleteFavoriteError },
+  ] = useDeleteFavoriteMutation({
+    variables: { tweetId: id, userId: currentUserId },
+    refetchQueries: [GET_TIMELINE_TWEETS, GET_CURRENT_USER],
+  });
 
   if (createFavoriteError) {
     return <p>Error creating favorite: {createFavoriteError.message}</p>;

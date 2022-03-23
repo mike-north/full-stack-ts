@@ -1,27 +1,11 @@
 import { SearchResult } from '@full-stack-ts/shared';
 import * as React from 'react';
 
-
 const SEARCH_TOPICS: SearchResult[] = [
-  'YouTube Gaming',
-  'Youtube Music',
-  'Youtube News',
-  'Youtube Movies',
-  {
-    name: 'YouTube Gaming',
-    handle: 'youtube_gaming',
-    avatarUrl: 'http://placecorgi.com/140/140',
-  },
-  {
-    name: 'YouTube Creators',
-    handle: 'YTCreators',
-    avatarUrl: 'http://placecorgi.com/170/170',
-  },
-  {
-    name: 'YouTube TV',
-    handle: 'youtubetv',
-    avatarUrl: 'http://placecorgi.com/181/181',
-  },
+  'Pet Adoption',
+  'Fake Slack',
+  'Fake Twitter',
+  'Fake Online Bank',
 ];
 
 export interface RightBarSearchProps {

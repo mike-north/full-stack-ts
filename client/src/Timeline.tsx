@@ -54,11 +54,8 @@ const Timeline: React.FC<TimelineProps> = ({
         const isFavorited = currentUserFavorites.includes(t.id);
 
         const { stats, id } = t;
-        const {
-          commentCount = 0,
-          favoriteCount = 0,
-          retweetCount = 0,
-        } = stats || {};
+        const { commentCount = 0, favoriteCount = 0, retweetCount = 0 } =
+          stats || {};
         const tweet = {
           id,
           isFavorited,

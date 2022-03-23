@@ -1,5 +1,11 @@
 import { DbFavorite, DbSuggestion, DbTrend, DbTweet, DbUser } from './db';
-import { Favorite, Suggestion, Trend, Tweet, User } from 'resolvers-types.generated';
+import {
+  Favorite,
+  Suggestion,
+  Trend,
+  Tweet,
+  User,
+} from 'resolvers-types.generated';
 
 export const userTransform = (dbUser: DbUser): User => {
   return {

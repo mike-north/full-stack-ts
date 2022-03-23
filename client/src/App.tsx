@@ -7,16 +7,6 @@ import LeftSidebar from './LeftSidebar';
 import RightBar from './RightBar';
 import Timeline from './Timeline';
 
-// const currentUser: DetailedUser = {
-//   name: 'Mike North',
-//   handle: 'MichaelLNorth',
-//   avatarUrl: 'http://localhost:3000/static/profile-pic.png',
-//   coverUrl: 'http://placecorgi.com/1200/300',
-//   followerCount: 1237,
-//   tweetCount: 15712,
-//   followingCount: 124974,
-// };
-
 // Source https://codepen.io/Gibbu/pen/dZBBZO
 
 export const GET_CURRENT_USER = gql`
@@ -71,7 +61,9 @@ const App: React.FC = () => {
   if (!data) return <p>No data.</p>;
   const { currentUser, trends, suggestions } = data;
   const { favorites: rawFavorites } = currentUser;
-  const favorites = (rawFavorites || []).map((f) => f.tweet?.id).filter(isDefined);
+  const favorites = (rawFavorites || [])
+    .map((f) => f.tweet?.id)
+    .filter(isDefined);
 
   return (
     <div>
@@ -79,7 +71,10 @@ const App: React.FC = () => {
       <Header currentUser={currentUser} />
 
       <div id="container" className="wrapper nav-closed">
-        <Timeline currentUserId={currentUser.id} currentUserFavorites={favorites} />
+        <Timeline
+          currentUserId={currentUser.id}
+          currentUserFavorites={favorites}
+        />
         <RightBar trends={trends || []} suggestions={suggestions || []} />
       </div>
     </div>

@@ -4,7 +4,7 @@ import {
   faBookmark,
   faEllipsisH,
   faEnvelope,
-  faHashtag
+  faHashtag,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DetailedUser } from '@full-stack-ts/shared';

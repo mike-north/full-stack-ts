@@ -6,5 +6,5 @@ export function humanFriendlyNumber(n: number): string {
 }
 
 export function integerWithCommas(n: number): string {
-  return n.toLocaleString('en-US')
+  return n.toLocaleString('en-US');
 }

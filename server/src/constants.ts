@@ -1,7 +1,6 @@
 import { join } from 'path';
 import * as pkgUp from 'pkg-up';
 
-
 export const SERVER_WORKSPACE_PKG_JSON_PATH = pkgUp.sync();
 if (!SERVER_WORKSPACE_PKG_JSON_PATH)
   throw new Error('package.json path could not be found');

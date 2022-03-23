@@ -1,6 +1,12 @@
 import { Resolvers } from 'resolvers-types.generated';
 import { DbFavorite, DbTweet, DbUser, default as Db } from './db';
-import { favoriteTransform, suggestionTransform, trendTransform, tweetTransform, userTransform } from './transforms';
+import {
+  favoriteTransform,
+  suggestionTransform,
+  trendTransform,
+  tweetTransform,
+  userTransform,
+} from './transforms';
 
 interface ResolverContext {
   currentUser?: DbUser;
@@ -36,8 +42,7 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
       },
       suggestions() {
         return db.getAllSuggestions().map(suggestionTransform);
-      }
-
+      },
     },
     Mutation: {
       createTweet(_parent, args, context) {
@@ -63,12 +68,11 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
       },
     },
     Trend: {
-      __resolveType(obj, _context, _info){
+      __resolveType(obj, _context, _info) {
         // Only Author has a name field
-        if(typeof (obj as any).hashtag === 'string'){
+        if (typeof (obj as any).hashtag === 'string') {
           return 'HashtagTrend';
-        }
-        else return 'TopicTrend';
+        } else return 'TopicTrend';
         return null; // GraphQLError is thrown
       },
     },
@@ -131,9 +135,8 @@ function createResolvers(db: Db): Resolvers<ResolverContext> {
         return {
           favoriteCount: db.getFavoriteCountForTweet(id),
           retweetCount: 999,
-          commentCount: 99
-        }
-
+          commentCount: 99,
+        };
       },
       favorites(tweet, _args, context) {
         const { id } = tweet;

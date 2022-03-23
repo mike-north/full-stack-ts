@@ -2,9 +2,13 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -42,18 +46,15 @@ export type Mutation = {
   deleteFavorite: Favorite;
 };
 
-
 export type MutationCreateFavoriteArgs = {
   tweetId: Scalars['String'];
   userId: Scalars['String'];
 };
 
-
 export type MutationCreateTweetArgs = {
   body: Scalars['String'];
   userId: Scalars['String'];
 };
-
 
 export type MutationDeleteFavoriteArgs = {
   tweetId: Scalars['String'];
@@ -68,7 +69,6 @@ export type Query = {
   tweets?: Maybe<Array<Tweet>>;
   user?: Maybe<User>;
 };
-
 
 export type QueryUserArgs = {
   id: Scalars['String'];
@@ -150,85 +150,163 @@ export type UserStats = {
   user: User;
 };
 
-export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never }>;
 
-
-export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, updatedAt: string, coverUrl: string, favorites?: Array<{ __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null }> | null, stats?: { __typename?: 'UserStats', tweetCount: number, followerCount: number, followingCount: number } | null }, suggestions?: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> | null, trends?: Array<{ __typename?: 'HashtagTrend', tweetCount: number, hashtag: string } | { __typename?: 'TopicTrend', tweetCount: number, topic: string, quote?: { __typename?: 'TopicTrendQuote', title: string, imageUrl: string, description: string } | null }> | null };
+export type GetCurrentUserQuery = {
+  __typename?: 'Query';
+  currentUser: {
+    __typename?: 'User';
+    id: string;
+    name: string;
+    handle: string;
+    avatarUrl: string;
+    createdAt: string;
+    updatedAt: string;
+    coverUrl: string;
+    favorites?: Array<{
+      __typename?: 'Favorite';
+      tweet?: { __typename?: 'Tweet'; id: string } | null;
+    }> | null;
+    stats?: {
+      __typename?: 'UserStats';
+      tweetCount: number;
+      followerCount: number;
+      followingCount: number;
+    } | null;
+  };
+  suggestions?: Array<{
+    __typename?: 'Suggestion';
+    name: string;
+    handle: string;
+    avatarUrl: string;
+    reason: string;
+  }> | null;
+  trends?: Array<
+    | { __typename?: 'HashtagTrend'; tweetCount: number; hashtag: string }
+    | {
+        __typename?: 'TopicTrend';
+        tweetCount: number;
+        topic: string;
+        quote?: {
+          __typename?: 'TopicTrendQuote';
+          title: string;
+          imageUrl: string;
+          description: string;
+        } | null;
+      }
+  > | null;
+};
 
 export type CreateNewTweetMutationVariables = Exact<{
   userId: Scalars['String'];
   body: Scalars['String'];
 }>;
 
+export type CreateNewTweetMutation = {
+  __typename?: 'Mutation';
+  createTweet: { __typename?: 'Tweet'; id: string };
+};
 
-export type CreateNewTweetMutation = { __typename?: 'Mutation', createTweet: { __typename?: 'Tweet', id: string } };
+export type GetTimelineTweetsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetTimelineTweetsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTimelineTweetsQuery = { __typename?: 'Query', tweets?: Array<{ __typename?: 'Tweet', id: string, body: string, createdAt: string, stats?: { __typename?: 'TweetStats', favoriteCount: number, retweetCount: number, commentCount: number } | null, favorites?: Array<{ __typename?: 'Favorite', user?: { __typename?: 'User', id: string } | null }> | null, author?: { __typename?: 'User', name: string, handle: string, avatarUrl: string } | null }> | null };
+export type GetTimelineTweetsQuery = {
+  __typename?: 'Query';
+  tweets?: Array<{
+    __typename?: 'Tweet';
+    id: string;
+    body: string;
+    createdAt: string;
+    stats?: {
+      __typename?: 'TweetStats';
+      favoriteCount: number;
+      retweetCount: number;
+      commentCount: number;
+    } | null;
+    favorites?: Array<{
+      __typename?: 'Favorite';
+      user?: { __typename?: 'User'; id: string } | null;
+    }> | null;
+    author?: {
+      __typename?: 'User';
+      name: string;
+      handle: string;
+      avatarUrl: string;
+    } | null;
+  }> | null;
+};
 
 export type CreateFavoriteMutationVariables = Exact<{
   tweetId: Scalars['String'];
   userId: Scalars['String'];
 }>;
 
-
-export type CreateFavoriteMutation = { __typename?: 'Mutation', createFavorite: { __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null, user?: { __typename?: 'User', id: string } | null } };
+export type CreateFavoriteMutation = {
+  __typename?: 'Mutation';
+  createFavorite: {
+    __typename?: 'Favorite';
+    tweet?: { __typename?: 'Tweet'; id: string } | null;
+    user?: { __typename?: 'User'; id: string } | null;
+  };
+};
 
 export type DeleteFavoriteMutationVariables = Exact<{
   tweetId: Scalars['String'];
   userId: Scalars['String'];
 }>;
 
-
-export type DeleteFavoriteMutation = { __typename?: 'Mutation', deleteFavorite: { __typename?: 'Favorite', tweet?: { __typename?: 'Tweet', id: string } | null, user?: { __typename?: 'User', id: string } | null } };
-
+export type DeleteFavoriteMutation = {
+  __typename?: 'Mutation';
+  deleteFavorite: {
+    __typename?: 'Favorite';
+    tweet?: { __typename?: 'Tweet'; id: string } | null;
+    user?: { __typename?: 'User'; id: string } | null;
+  };
+};
 
 export const GetCurrentUserDocument = gql`
-    query GetCurrentUser {
-  currentUser {
-    favorites {
-      tweet {
-        id
+  query GetCurrentUser {
+    currentUser {
+      favorites {
+        tweet {
+          id
+        }
+      }
+      id
+      name
+      handle
+      avatarUrl
+      createdAt
+      updatedAt
+      coverUrl
+      stats {
+        tweetCount
+        followerCount
+        followingCount
       }
     }
-    id
-    name
-    handle
-    avatarUrl
-    createdAt
-    updatedAt
-    coverUrl
-    stats {
-      tweetCount
-      followerCount
-      followingCount
+    suggestions {
+      name
+      handle
+      avatarUrl
+      reason
     }
-  }
-  suggestions {
-    name
-    handle
-    avatarUrl
-    reason
-  }
-  trends {
-    ... on TopicTrend {
-      tweetCount
-      topic
-      quote {
-        title
-        imageUrl
-        description
+    trends {
+      ... on TopicTrend {
+        tweetCount
+        topic
+        quote {
+          title
+          imageUrl
+          description
+        }
+      }
+      ... on HashtagTrend {
+        tweetCount
+        hashtag
       }
     }
-    ... on HashtagTrend {
-      tweetCount
-      hashtag
-    }
   }
-}
-    `;
+`;
 
 /**
  * __useGetCurrentUserQuery__
@@ -245,25 +323,51 @@ export const GetCurrentUserDocument = gql`
  *   },
  * });
  */
-export function useGetCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
-      }
-export function useGetCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCurrentUserQuery, GetCurrentUserQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(GetCurrentUserDocument, options);
-        }
-export type GetCurrentUserQueryHookResult = ReturnType<typeof useGetCurrentUserQuery>;
-export type GetCurrentUserLazyQueryHookResult = ReturnType<typeof useGetCurrentUserLazyQuery>;
-export type GetCurrentUserQueryResult = Apollo.QueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
-export const CreateNewTweetDocument = gql`
-    mutation CreateNewTweet($userId: String!, $body: String!) {
-  createTweet(userId: $userId, body: $body) {
-    id
-  }
+export function useGetCurrentUserQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetCurrentUserQuery,
+    GetCurrentUserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(
+    GetCurrentUserDocument,
+    options
+  );
 }
-    `;
-export type CreateNewTweetMutationFn = Apollo.MutationFunction<CreateNewTweetMutation, CreateNewTweetMutationVariables>;
+export function useGetCurrentUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetCurrentUserQuery,
+    GetCurrentUserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetCurrentUserQuery, GetCurrentUserQueryVariables>(
+    GetCurrentUserDocument,
+    options
+  );
+}
+export type GetCurrentUserQueryHookResult = ReturnType<
+  typeof useGetCurrentUserQuery
+>;
+export type GetCurrentUserLazyQueryHookResult = ReturnType<
+  typeof useGetCurrentUserLazyQuery
+>;
+export type GetCurrentUserQueryResult = Apollo.QueryResult<
+  GetCurrentUserQuery,
+  GetCurrentUserQueryVariables
+>;
+export const CreateNewTweetDocument = gql`
+  mutation CreateNewTweet($userId: String!, $body: String!) {
+    createTweet(userId: $userId, body: $body) {
+      id
+    }
+  }
+`;
+export type CreateNewTweetMutationFn = Apollo.MutationFunction<
+  CreateNewTweetMutation,
+  CreateNewTweetMutationVariables
+>;
 
 /**
  * __useCreateNewTweetMutation__
@@ -283,37 +387,50 @@ export type CreateNewTweetMutationFn = Apollo.MutationFunction<CreateNewTweetMut
  *   },
  * });
  */
-export function useCreateNewTweetMutation(baseOptions?: Apollo.MutationHookOptions<CreateNewTweetMutation, CreateNewTweetMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateNewTweetMutation, CreateNewTweetMutationVariables>(CreateNewTweetDocument, options);
-      }
-export type CreateNewTweetMutationHookResult = ReturnType<typeof useCreateNewTweetMutation>;
+export function useCreateNewTweetMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateNewTweetMutation,
+    CreateNewTweetMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateNewTweetMutation,
+    CreateNewTweetMutationVariables
+  >(CreateNewTweetDocument, options);
+}
+export type CreateNewTweetMutationHookResult = ReturnType<
+  typeof useCreateNewTweetMutation
+>;
 export type CreateNewTweetMutationResult = Apollo.MutationResult<CreateNewTweetMutation>;
-export type CreateNewTweetMutationOptions = Apollo.BaseMutationOptions<CreateNewTweetMutation, CreateNewTweetMutationVariables>;
+export type CreateNewTweetMutationOptions = Apollo.BaseMutationOptions<
+  CreateNewTweetMutation,
+  CreateNewTweetMutationVariables
+>;
 export const GetTimelineTweetsDocument = gql`
-    query GetTimelineTweets {
-  tweets {
-    id
-    body
-    stats {
-      favoriteCount
-      retweetCount
-      commentCount
-    }
-    createdAt
-    favorites {
-      user {
-        id
+  query GetTimelineTweets {
+    tweets {
+      id
+      body
+      stats {
+        favoriteCount
+        retweetCount
+        commentCount
       }
-    }
-    author {
-      name
-      handle
-      avatarUrl
+      createdAt
+      favorites {
+        user {
+          id
+        }
+      }
+      author {
+        name
+        handle
+        avatarUrl
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetTimelineTweetsQuery__
@@ -330,30 +447,56 @@ export const GetTimelineTweetsDocument = gql`
  *   },
  * });
  */
-export function useGetTimelineTweetsQuery(baseOptions?: Apollo.QueryHookOptions<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>(GetTimelineTweetsDocument, options);
-      }
-export function useGetTimelineTweetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>(GetTimelineTweetsDocument, options);
-        }
-export type GetTimelineTweetsQueryHookResult = ReturnType<typeof useGetTimelineTweetsQuery>;
-export type GetTimelineTweetsLazyQueryHookResult = ReturnType<typeof useGetTimelineTweetsLazyQuery>;
-export type GetTimelineTweetsQueryResult = Apollo.QueryResult<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>;
+export function useGetTimelineTweetsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetTimelineTweetsQuery,
+    GetTimelineTweetsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetTimelineTweetsQuery,
+    GetTimelineTweetsQueryVariables
+  >(GetTimelineTweetsDocument, options);
+}
+export function useGetTimelineTweetsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetTimelineTweetsQuery,
+    GetTimelineTweetsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetTimelineTweetsQuery,
+    GetTimelineTweetsQueryVariables
+  >(GetTimelineTweetsDocument, options);
+}
+export type GetTimelineTweetsQueryHookResult = ReturnType<
+  typeof useGetTimelineTweetsQuery
+>;
+export type GetTimelineTweetsLazyQueryHookResult = ReturnType<
+  typeof useGetTimelineTweetsLazyQuery
+>;
+export type GetTimelineTweetsQueryResult = Apollo.QueryResult<
+  GetTimelineTweetsQuery,
+  GetTimelineTweetsQueryVariables
+>;
 export const CreateFavoriteDocument = gql`
-    mutation CreateFavorite($tweetId: String!, $userId: String!) {
-  createFavorite(tweetId: $tweetId, userId: $userId) {
-    tweet {
-      id
-    }
-    user {
-      id
+  mutation CreateFavorite($tweetId: String!, $userId: String!) {
+    createFavorite(tweetId: $tweetId, userId: $userId) {
+      tweet {
+        id
+      }
+      user {
+        id
+      }
     }
   }
-}
-    `;
-export type CreateFavoriteMutationFn = Apollo.MutationFunction<CreateFavoriteMutation, CreateFavoriteMutationVariables>;
+`;
+export type CreateFavoriteMutationFn = Apollo.MutationFunction<
+  CreateFavoriteMutation,
+  CreateFavoriteMutationVariables
+>;
 
 /**
  * __useCreateFavoriteMutation__
@@ -373,26 +516,42 @@ export type CreateFavoriteMutationFn = Apollo.MutationFunction<CreateFavoriteMut
  *   },
  * });
  */
-export function useCreateFavoriteMutation(baseOptions?: Apollo.MutationHookOptions<CreateFavoriteMutation, CreateFavoriteMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateFavoriteMutation, CreateFavoriteMutationVariables>(CreateFavoriteDocument, options);
-      }
-export type CreateFavoriteMutationHookResult = ReturnType<typeof useCreateFavoriteMutation>;
+export function useCreateFavoriteMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateFavoriteMutation,
+    CreateFavoriteMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateFavoriteMutation,
+    CreateFavoriteMutationVariables
+  >(CreateFavoriteDocument, options);
+}
+export type CreateFavoriteMutationHookResult = ReturnType<
+  typeof useCreateFavoriteMutation
+>;
 export type CreateFavoriteMutationResult = Apollo.MutationResult<CreateFavoriteMutation>;
-export type CreateFavoriteMutationOptions = Apollo.BaseMutationOptions<CreateFavoriteMutation, CreateFavoriteMutationVariables>;
+export type CreateFavoriteMutationOptions = Apollo.BaseMutationOptions<
+  CreateFavoriteMutation,
+  CreateFavoriteMutationVariables
+>;
 export const DeleteFavoriteDocument = gql`
-    mutation DeleteFavorite($tweetId: String!, $userId: String!) {
-  deleteFavorite(tweetId: $tweetId, userId: $userId) {
-    tweet {
-      id
-    }
-    user {
-      id
+  mutation DeleteFavorite($tweetId: String!, $userId: String!) {
+    deleteFavorite(tweetId: $tweetId, userId: $userId) {
+      tweet {
+        id
+      }
+      user {
+        id
+      }
     }
   }
-}
-    `;
-export type DeleteFavoriteMutationFn = Apollo.MutationFunction<DeleteFavoriteMutation, DeleteFavoriteMutationVariables>;
+`;
+export type DeleteFavoriteMutationFn = Apollo.MutationFunction<
+  DeleteFavoriteMutation,
+  DeleteFavoriteMutationVariables
+>;
 
 /**
  * __useDeleteFavoriteMutation__
@@ -412,10 +571,23 @@ export type DeleteFavoriteMutationFn = Apollo.MutationFunction<DeleteFavoriteMut
  *   },
  * });
  */
-export function useDeleteFavoriteMutation(baseOptions?: Apollo.MutationHookOptions<DeleteFavoriteMutation, DeleteFavoriteMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteFavoriteMutation, DeleteFavoriteMutationVariables>(DeleteFavoriteDocument, options);
-      }
-export type DeleteFavoriteMutationHookResult = ReturnType<typeof useDeleteFavoriteMutation>;
+export function useDeleteFavoriteMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteFavoriteMutation,
+    DeleteFavoriteMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    DeleteFavoriteMutation,
+    DeleteFavoriteMutationVariables
+  >(DeleteFavoriteDocument, options);
+}
+export type DeleteFavoriteMutationHookResult = ReturnType<
+  typeof useDeleteFavoriteMutation
+>;
 export type DeleteFavoriteMutationResult = Apollo.MutationResult<DeleteFavoriteMutation>;
-export type DeleteFavoriteMutationOptions = Apollo.BaseMutationOptions<DeleteFavoriteMutation, DeleteFavoriteMutationVariables>;
+export type DeleteFavoriteMutationOptions = Apollo.BaseMutationOptions<
+  DeleteFavoriteMutation,
+  DeleteFavoriteMutationVariables
+>;

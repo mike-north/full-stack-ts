@@ -11,6 +11,14 @@ export function seedDb(db: Db) {
         title: 'Frontend Masters',
       }
     );
+    db.createTopicTrend(
+      { topic: 'Pointless Suggestions', tweetCount: 999 },
+      {
+        description: "It looks like you're trying to write a letter...",
+        imageUrl: 'http://localhost:3000/static/clippy-logo.jpeg',
+        title: 'clippy',
+      }
+    );
     db.write();
   }
   if (db.getAllSuggestions().length === 0) {
@@ -19,6 +27,24 @@ export function seedDb(db: Db) {
       handle: 'TypeScript',
       avatarUrl: 'http://localhost:3000/static/ts-logo.png',
       reason: 'Because you follow @MichaelLNorth',
+    });
+    db.createSuggestion({
+      name: 'jQuery',
+      handle: 'jquery',
+      avatarUrl: 'http://localhost:3000/static/jquery-logo.jpeg',
+      reason: 'Because you follow @FrontendMasters',
+    });
+    db.createSuggestion({
+      name: 'GitHub',
+      handle: 'github',
+      avatarUrl: 'http://localhost:3000/static/github-logo.jpeg',
+      reason: 'Because you follow @MichaelLNorth',
+    });
+    db.createSuggestion({
+      name: 'Microsoft',
+      handle: 'ms',
+      avatarUrl: 'http://localhost:3000/static/msft-logo.png',
+      reason: 'Because you follow @lisaychuang',
     });
     db.write();
   }

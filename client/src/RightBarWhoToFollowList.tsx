@@ -12,18 +12,22 @@ const RightBarWhoToFollowList: React.FC<RightBarWhoToFollowListProps> = ({
     <section>
       <header>
         <h3>Who to follow</h3>
-        <a href="#" onClick={e => e.preventDefault()}>View All</a>
+        <a href="#" onClick={(e) => e.preventDefault()}>
+          View All
+        </a>
       </header>
       <main>
         {suggestions.map((suggestion, index) => {
           const { name, handle, avatarUrl, reason } = suggestion;
           return (
-            <a href="#" onClick={e => e.preventDefault()} key={index}>
+            <a href="#" onClick={(e) => e.preventDefault()} key={index}>
               <img src={avatarUrl} />
               <div className="user">
                 <p>
                   {name}
-                  <b><small>@{handle}</small></b>
+                  <b>
+                    <small>@{handle}</small>
+                  </b>
                 </p>
                 <span>{reason}</span>
               </div>
