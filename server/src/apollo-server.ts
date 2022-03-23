@@ -7,7 +7,7 @@ import * as express from 'express';
 import { Server } from 'http';
 import Db from './db';
 import { addResolversToSchema } from '@graphql-tools/schema';
-import { createResolvers } from './resolvers';
+import { createResolvers, TwitterResolverContext } from './resolvers';
 
 const SCHEMA = loadSchemaSync(GRAPHQL_SCHEMA_PATH, {
   loaders: [new GraphQLFileLoader()],
@@ -19,7 +19,10 @@ export async function createApolloServer(
   app: express.Application
 ): Promise<ApolloServer<ExpressContext>> {
   const server = new ApolloServer({
-    context: () => ({ db }),
+    context: () =>
+      ({
+        db,
+      } as TwitterResolverContext),
     schema: addResolversToSchema({
       schema: SCHEMA,
       resolvers: createResolvers(),
