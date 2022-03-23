@@ -1,8 +1,5 @@
 export interface ClientEntity {
   id: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: string;
 }
 export interface ClientUser extends ClientEntity {
   name: string;
