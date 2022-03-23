@@ -16,7 +16,7 @@
     "codegen-client": "cd client && yarn codegen",
     "codegen-server": "cd server && yarn codegen",
     "codegen": "concurrently yarn:codegen-* -c cyan,magenta",
-    "build": "concurrently yarn:build-* -c cyan,magenta,yellow",
+    "build": "yarn build-shared && yarn build-server && yarn build-client",
     "test": "concurrently yarn:test-* -c cyan,magenta,yellow",
     "dev": "cd server && yarn dev"
   },
