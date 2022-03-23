@@ -29,6 +29,12 @@ export type FavoriteInput = {
   userId: Scalars['String'];
 };
 
+export type HashtagTrend = {
+  __typename?: 'HashtagTrend';
+  hashtag: Scalars['String'];
+  tweetCount: Scalars['Int'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createFavorite: Favorite;
@@ -56,6 +62,7 @@ export type Query = {
   __typename?: 'Query';
   currentUser: User;
   suggestions: Array<Suggestion>;
+  trends: Array<Trend>;
   tweets: Array<Tweet>;
 };
 
@@ -66,6 +73,22 @@ export type Suggestion = {
   name: Scalars['String'];
   reason: Scalars['String'];
 };
+
+export type TopicTrend = {
+  __typename?: 'TopicTrend';
+  quote?: Maybe<TopicTrendQuote>;
+  topic: Scalars['String'];
+  tweetCount: Scalars['Int'];
+};
+
+export type TopicTrendQuote = {
+  __typename?: 'TopicTrendQuote';
+  description: Scalars['String'];
+  imageUrl: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type Trend = HashtagTrend | TopicTrend;
 
 export type Tweet = {
   __typename?: 'Tweet';
@@ -107,7 +130,7 @@ export type UserStats = {
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, stats?: { __typename?: 'UserStats', tweetCount: number, followingCount: number, followerCount: number } | null, favorites?: Array<{ __typename?: 'Favorite', tweet: { __typename?: 'Tweet', id: string } }> | null }, suggestions: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> };
+export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, stats?: { __typename?: 'UserStats', tweetCount: number, followingCount: number, followerCount: number } | null, favorites?: Array<{ __typename?: 'Favorite', tweet: { __typename?: 'Tweet', id: string } }> | null }, suggestions: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }>, trends: Array<{ __typename?: 'HashtagTrend', tweetCount: number, hashtag: string } | { __typename?: 'TopicTrend', tweetCount: number, topic: string, quote?: { __typename?: 'TopicTrendQuote', title: string, imageUrl: string, description: string } | null }> };
 
 export type CreateNewTweetMutationVariables = Exact<{
   userId: Scalars['String'];
@@ -161,6 +184,21 @@ export const GetCurrentUserDocument = gql`
     handle
     avatarUrl
     reason
+  }
+  trends {
+    ... on TopicTrend {
+      tweetCount
+      topic
+      quote {
+        title
+        imageUrl
+        description
+      }
+    }
+    ... on HashtagTrend {
+      tweetCount
+      hashtag
+    }
   }
 }
     `;
