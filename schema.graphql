@@ -3,6 +3,9 @@ type Query {
   suggestions: [Suggestion!]!
   tweets: [Tweet!]!
 }
+type Mutation {
+  createTweet(userId: String!, body: String!): Tweet!
+}
 type User {
   id: String!
   name: String!
