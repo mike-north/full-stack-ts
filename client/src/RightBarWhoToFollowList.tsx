@@ -1,8 +1,8 @@
-import { Suggestion } from '@full-stack-ts/shared';
 import * as React from 'react';
+import { ClientSuggestion } from './client-types';
 
 export interface RightBarWhoToFollowListProps {
-  suggestions: Suggestion[];
+  suggestions: ClientSuggestion[];
 }
 
 const RightBarWhoToFollowList: React.FC<RightBarWhoToFollowListProps> = ({

@@ -8,10 +8,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import { DetailedUser } from './Header';
+import { ClientUser } from './client-types';
 
 export interface LeftSidebarProps {
-  currentUser: DetailedUser;
+  currentUser: ClientUser;
 }
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ currentUser }) => {

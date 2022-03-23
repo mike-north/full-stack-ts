@@ -1,31 +1,12 @@
 import * as React from 'react';
+import { ClientSuggestion, ClientTrend } from './client-types';
 import RightBarSearch from './RightBarSearch';
 import RightBarTrendingList from './RightBarTrendingList';
 import RightBarWhoToFollowList from './RightBarWhoToFollowList';
 
-export interface UIHashTagTrend {
-  hashtag: string;
-  tweetCount: number;
-}
-export interface UITopicTrend {
-  topic: string;
-  tweetCount: number;
-  quote?: null | {
-    title: string;
-    imageUrl: string;
-    description: string;
-  };
-}
-export type UITrend = UIHashTagTrend | UITopicTrend;
-export interface UISuggestion {
-  name: string;
-  handle: string;
-  avatarUrl: string;
-  reason: string;
-}
 export interface RightBarProps {
-  trends: UITrend[];
-  suggestions: UISuggestion[];
+  trends: ClientTrend[];
+  suggestions: ClientSuggestion[];
 }
 
 const RightBar: React.FC<RightBarProps> = ({ trends, suggestions }) => (

@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { ClientUserStatistics, ClientUser } from './client-types';
 import CurrentUserSummary from './CurrentUserSummary';
-import { User, UserStatistics } from '@full-stack-ts/shared';
 
-export interface DetailedUser extends User {
+ interface DetailedUser extends ClientUser {
   coverUrl?: string | null;
-  stats: UserStatistics;
+  stats?: ClientUserStatistics | null;
 }
 
 export interface HeaderProps {

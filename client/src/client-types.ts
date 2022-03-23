@@ -1,31 +1,26 @@
-export interface Entity {
+export interface ClientEntity {
   id: string;
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;
 }
-export interface User extends Entity {
+export interface ClientUser extends ClientEntity {
   name: string;
   handle: string;
   avatarUrl: string;
 }
 
-export interface UserStatistics {
+export interface ClientUserStatistics {
   followerCount: number;
   tweetCount: number;
   followingCount: number;
 }
 
-export interface DetailedUser extends User {
-  coverUrl?: string | null;
-  statistics: UserStatistics;
-}
-
-export interface HashtagTrend {
+export interface ClientHashtagTrend {
   hashtag: string;
   tweetCount: number;
 }
-export interface TopicTrend {
+export interface ClientTopicTrend {
   topic: string;
   tweetCount: number;
   quote?: {
@@ -34,18 +29,18 @@ export interface TopicTrend {
     imageUrl: string;
   };
 }
-export type Trend = HashtagTrend | TopicTrend;
+export type ClientTrend = ClientHashtagTrend | ClientTopicTrend;
 
-export interface Suggestion {
+export interface ClientSuggestion {
   name: string;
   handle: string;
   avatarUrl: string;
   reason: string;
 }
 
-export interface UserSearchResult {
+export interface ClientUserSearchResult {
   name: string;
   handle: string;
   avatarUrl: string;
 }
-export type SearchResult = string | UserSearchResult;
+export type ClientSearchResult = string | ClientUserSearchResult;

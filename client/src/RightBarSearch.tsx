@@ -1,7 +1,7 @@
-import { SearchResult } from '@full-stack-ts/shared';
 import * as React from 'react';
+import { ClientSearchResult } from './client-types';
 
-const SEARCH_TOPICS: SearchResult[] = [
+const SEARCH_TOPICS: ClientSearchResult[] = [
   'Pet Adoption',
   'Fake Slack',
   'Fake Twitter',
@@ -9,11 +9,11 @@ const SEARCH_TOPICS: SearchResult[] = [
 ];
 
 export interface RightBarSearchProps {
-  render: (result: SearchResult) => React.ReactNode;
+  render: (result: ClientSearchResult) => React.ReactNode;
 }
 
 const RightBarSearch: React.FC<RightBarSearchProps> = ({ render }) => {
-  const [results, setResults] = React.useState([] as SearchResult[]);
+  const [results, setResults] = React.useState([] as ClientSearchResult[]);
 
   let timer: ReturnType<typeof setTimeout>;
 

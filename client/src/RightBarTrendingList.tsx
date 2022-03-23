@@ -1,11 +1,16 @@
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { isHashtagTrend, Trend } from '@full-stack-ts/shared';
 import * as React from 'react';
+import { ClientHashtagTrend, ClientTrend } from './client-types';
 import { integerWithCommas } from './utils/number';
 
+function isHashtagTrend(arg: any): arg is ClientHashtagTrend {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  return typeof arg.hashtag === 'string';
+}
+
 export interface RightBarTrendingListProps {
-  trends: Trend[];
+  trends: ClientTrend[];
 }
 
 const RightBarTrendingList: React.FC<RightBarTrendingListProps> = ({
