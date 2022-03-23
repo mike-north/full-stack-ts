@@ -22,6 +22,9 @@ export async function createApolloServer(
     context: () =>
       ({
         db,
+        dbTweetCache: {},
+        dbTweetToFavoriteCountMap: {},
+        dbUserCache: {},
       } as TwitterResolverContext),
     schema: addResolversToSchema({
       schema: SCHEMA,
