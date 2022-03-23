@@ -22,6 +22,8 @@
     "@graphql-tools/merge": "^6.0.0",
     "@graphql-tools/schema": "^8.3.3",
     "apollo-server": "^3.6.4",
+    "apollo-server-core": "^3.6.5",
+    "apollo-server-express": "^3.6.5",
     "chalk": "^4.0.0",
     "execa": "^5.0.0",
     "express": "^4.17.3",
@@ -40,7 +42,8 @@
     "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
   },
-  "engines": {
-    "node": ">=12.0.0"
+  "volta": {
+    "node": "14.19.1",
+    "yarn": "1.22.18"
   }
 }
