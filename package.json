@@ -14,11 +14,15 @@
     "test-client": "cd client && yarn test",
     "test-server": "cd server && yarn test",
     "test-shared": "cd shared && yarn test",
+    "clean-client": "cd client && yarn clean",
+    "clean-server": "cd server && yarn clean",
+    "clean-shared": "cd shared && yarn clean",
     "codegen-client": "cd client && yarn codegen",
     "codegen-server": "cd server && yarn codegen",
     "codegen": "concurrently yarn:codegen-* -c cyan,magenta",
     "build": "yarn build-shared && yarn build-server && yarn build-client",
     "test": "concurrently yarn:test-* -c cyan,magenta,yellow",
+    "clean": "concurrently yarn:clean-* -c cyan,magenta,yellow",
     "dev": "cd server && yarn dev"
   },
   "workspaces": [

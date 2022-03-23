@@ -9,10 +9,14 @@
   "scripts": {
     "test": "echo 'no shared tests yet'",
     "build": "tsc",
+    "clean": "yarn rimraf dist",
     "dev": "tsc --watch --preserveWatchOutput"
   },
   "volta": {
     "node": "14.19.1",
     "yarn": "1.22.18"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
   }
 }

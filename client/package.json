@@ -9,7 +9,8 @@
     "test": "echo 'no client-side tests yet'",
     "type-check": "tsc -p .",
     "build": "yarn type-check && yarn parcel build  --dist-dir dist src/index.html",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "clean": "yarn rimraf dist"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
@@ -41,6 +42,7 @@
     "parcel": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
     "typescript": "^4.6.2"
   },
   "volta": {
