@@ -7,16 +7,6 @@ import Timeline from './Timeline';
 import { gql } from '@apollo/client';
 import { useGetCurrentUserQuery } from './generated/graphql';
 
-const TRENDS = [
-  {
-    topic: 'Frontend Masters',
-    tweetCount: 12345,
-    title: 'Frontend Masters',
-    description: 'Launch of new full stack TS course',
-    imageUrl: 'http://localhost:3000/static/fem_logo.png',
-  },
-];
-
 export const GET_CURRENT_USER = gql`
   query GetCurrentUser {
     currentUser {
@@ -42,6 +32,21 @@ export const GET_CURRENT_USER = gql`
       avatarUrl
       reason
     }
+    trends {
+      ... on TopicTrend {
+        tweetCount
+        topic
+        quote {
+          title
+          imageUrl
+          description
+        }
+      }
+      ... on HashtagTrend {
+        tweetCount
+        hashtag
+      }
+    }
   }
 `;
 
@@ -50,9 +55,10 @@ const App: React.FC = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!data) return <p>No data.</p>;
-  const { currentUser, suggestions = [] } = data;
+  const { currentUser, suggestions = [], trends = [] } = data;
   const { favorites: rawFavorites } = currentUser;
 
+  const filteredTrends = trends.filter(isDefined);
   const favorites = (rawFavorites || []).filter(isDefined)
     .map((f) => f.tweet.id);
     return (
@@ -65,7 +71,7 @@ const App: React.FC = () => {
           currentUserId={currentUser.id}
           currentUserFavorites={favorites}
         />
-        <RightBar trends={TRENDS} suggestions={suggestions} />
+        <RightBar trends={filteredTrends} suggestions={suggestions} />
       </div>
     </div>
   );

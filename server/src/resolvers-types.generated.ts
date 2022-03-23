@@ -28,6 +28,12 @@ export type FavoriteInput = {
   userId: Scalars['String'];
 };
 
+export type HashtagTrend = {
+  __typename?: 'HashtagTrend';
+  hashtag: Scalars['String'];
+  tweetCount: Scalars['Int'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createFavorite: Favorite;
@@ -55,6 +61,7 @@ export type Query = {
   __typename?: 'Query';
   currentUser: User;
   suggestions: Array<Suggestion>;
+  trends: Array<Trend>;
   tweets: Array<Tweet>;
 };
 
@@ -65,6 +72,22 @@ export type Suggestion = {
   name: Scalars['String'];
   reason: Scalars['String'];
 };
+
+export type TopicTrend = {
+  __typename?: 'TopicTrend';
+  quote?: Maybe<TopicTrendQuote>;
+  topic: Scalars['String'];
+  tweetCount: Scalars['Int'];
+};
+
+export type TopicTrendQuote = {
+  __typename?: 'TopicTrendQuote';
+  description: Scalars['String'];
+  imageUrl: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type Trend = HashtagTrend | TopicTrend;
 
 export type Tweet = {
   __typename?: 'Tweet';
@@ -175,11 +198,15 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Favorite: ResolverTypeWrapper<Favorite>;
   FavoriteInput: FavoriteInput;
+  HashtagTrend: ResolverTypeWrapper<HashtagTrend>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Suggestion: ResolverTypeWrapper<Suggestion>;
+  TopicTrend: ResolverTypeWrapper<TopicTrend>;
+  TopicTrendQuote: ResolverTypeWrapper<TopicTrendQuote>;
+  Trend: ResolversTypes['HashtagTrend'] | ResolversTypes['TopicTrend'];
   Tweet: ResolverTypeWrapper<Tweet>;
   TweetStats: ResolverTypeWrapper<TweetStats>;
   User: ResolverTypeWrapper<User>;
@@ -191,11 +218,15 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Favorite: Favorite;
   FavoriteInput: FavoriteInput;
+  HashtagTrend: HashtagTrend;
   Int: Scalars['Int'];
   Mutation: {};
   Query: {};
   String: Scalars['String'];
   Suggestion: Suggestion;
+  TopicTrend: TopicTrend;
+  TopicTrendQuote: TopicTrendQuote;
+  Trend: ResolversParentTypes['HashtagTrend'] | ResolversParentTypes['TopicTrend'];
   Tweet: Tweet;
   TweetStats: TweetStats;
   User: User;
@@ -211,6 +242,12 @@ export type FavoriteResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type HashtagTrendResolvers<ContextType = any, ParentType extends ResolversParentTypes['HashtagTrend'] = ResolversParentTypes['HashtagTrend']> = {
+  hashtag?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  tweetCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createFavorite?: Resolver<ResolversTypes['Favorite'], ParentType, ContextType, RequireFields<MutationCreateFavoriteArgs, 'favorite'>>;
   createTweet?: Resolver<ResolversTypes['Tweet'], ParentType, ContextType, RequireFields<MutationCreateTweetArgs, 'body' | 'userId'>>;
@@ -220,6 +257,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   currentUser?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   suggestions?: Resolver<Array<ResolversTypes['Suggestion']>, ParentType, ContextType>;
+  trends?: Resolver<Array<ResolversTypes['Trend']>, ParentType, ContextType>;
   tweets?: Resolver<Array<ResolversTypes['Tweet']>, ParentType, ContextType>;
 };
 
@@ -229,6 +267,24 @@ export type SuggestionResolvers<ContextType = any, ParentType extends ResolversP
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   reason?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TopicTrendResolvers<ContextType = any, ParentType extends ResolversParentTypes['TopicTrend'] = ResolversParentTypes['TopicTrend']> = {
+  quote?: Resolver<Maybe<ResolversTypes['TopicTrendQuote']>, ParentType, ContextType>;
+  topic?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  tweetCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TopicTrendQuoteResolvers<ContextType = any, ParentType extends ResolversParentTypes['TopicTrendQuote'] = ResolversParentTypes['TopicTrendQuote']> = {
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  imageUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TrendResolvers<ContextType = any, ParentType extends ResolversParentTypes['Trend'] = ResolversParentTypes['Trend']> = {
+  __resolveType: TypeResolveFn<'HashtagTrend' | 'TopicTrend', ParentType, ContextType>;
 };
 
 export type TweetResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tweet'] = ResolversParentTypes['Tweet']> = {
@@ -270,9 +326,13 @@ export type UserStatsResolvers<ContextType = any, ParentType extends ResolversPa
 
 export type Resolvers<ContextType = any> = {
   Favorite?: FavoriteResolvers<ContextType>;
+  HashtagTrend?: HashtagTrendResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Suggestion?: SuggestionResolvers<ContextType>;
+  TopicTrend?: TopicTrendResolvers<ContextType>;
+  TopicTrendQuote?: TopicTrendQuoteResolvers<ContextType>;
+  Trend?: TrendResolvers<ContextType>;
   Tweet?: TweetResolvers<ContextType>;
   TweetStats?: TweetStatsResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

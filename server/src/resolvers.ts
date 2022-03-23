@@ -4,6 +4,7 @@ import TwitterQueryResolver from './resolvers/Query';
 import TwitterMutationResolver from './resolvers/Mutation';
 import TwitterTweetResolver from './resolvers/Tweet';
 import TwitterUserResolver from './resolvers/User';
+import TwitterTrendResolver from './resolvers/Trend';
 
 export interface TwitterResolverContext {
   db: Db;
@@ -18,6 +19,7 @@ export function createResolvers(): Resolvers<TwitterResolverContext> {
     Mutation: TwitterMutationResolver,
     Tweet: TwitterTweetResolver,
     User: TwitterUserResolver,
+    Trend: TwitterTrendResolver,
   };
   return resolvers;
 }
