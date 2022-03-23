@@ -24,7 +24,7 @@ export interface ClientTopicTrend {
     title: string;
     description: string;
     imageUrl: string;
-  };
+  } | null;
 }
 export type ClientTrend = ClientHashtagTrend | ClientTopicTrend;
 
