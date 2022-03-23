@@ -19,6 +19,7 @@ export type Query = {
   __typename?: 'Query';
   currentUser: User;
   suggestions: Array<Suggestion>;
+  tweets: Array<Tweet>;
 };
 
 export type Suggestion = {
@@ -29,6 +30,23 @@ export type Suggestion = {
   reason: Scalars['String'];
 };
 
+export type Tweet = {
+  __typename?: 'Tweet';
+  author?: Maybe<User>;
+  body: Scalars['String'];
+  createdAt: Scalars['String'];
+  id: Scalars['String'];
+  stats?: Maybe<TweetStats>;
+  updatedAt: Scalars['String'];
+};
+
+export type TweetStats = {
+  __typename?: 'TweetStats';
+  commentCount: Scalars['Int'];
+  favoriteCount: Scalars['Int'];
+  retweetCount: Scalars['Int'];
+};
+
 export type User = {
   __typename?: 'User';
   avatarUrl: Scalars['String'];
@@ -37,13 +55,26 @@ export type User = {
   handle: Scalars['String'];
   id: Scalars['String'];
   name: Scalars['String'];
+  stats?: Maybe<UserStats>;
   updatedAt: Scalars['String'];
+};
+
+export type UserStats = {
+  __typename?: 'UserStats';
+  followerCount: Scalars['Int'];
+  followingCount: Scalars['Int'];
+  tweetCount: Scalars['Int'];
 };
 
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string }, suggestions: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> };
+export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, stats?: { __typename?: 'UserStats', tweetCount: number, followingCount: number, followerCount: number } | null }, suggestions: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> };
+
+export type GetTimelineTweetsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTimelineTweetsQuery = { __typename?: 'Query', tweets: Array<{ __typename?: 'Tweet', id: string, body: string, createdAt: string, stats?: { __typename?: 'TweetStats', favoriteCount: number, retweetCount: number, commentCount: number } | null, author?: { __typename?: 'User', name: string, handle: string, avatarUrl: string } | null }> };
 
 
 export const GetCurrentUserDocument = gql`
@@ -54,6 +85,11 @@ export const GetCurrentUserDocument = gql`
     handle
     avatarUrl
     createdAt
+    stats {
+      tweetCount
+      followingCount
+      followerCount
+    }
   }
   suggestions {
     name
@@ -90,3 +126,49 @@ export function useGetCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetCurrentUserQueryHookResult = ReturnType<typeof useGetCurrentUserQuery>;
 export type GetCurrentUserLazyQueryHookResult = ReturnType<typeof useGetCurrentUserLazyQuery>;
 export type GetCurrentUserQueryResult = Apollo.QueryResult<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
+export const GetTimelineTweetsDocument = gql`
+    query GetTimelineTweets {
+  tweets {
+    id
+    body
+    stats {
+      favoriteCount
+      retweetCount
+      commentCount
+    }
+    createdAt
+    author {
+      name
+      handle
+      avatarUrl
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetTimelineTweetsQuery__
+ *
+ * To run a query within a React component, call `useGetTimelineTweetsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTimelineTweetsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTimelineTweetsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTimelineTweetsQuery(baseOptions?: Apollo.QueryHookOptions<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>(GetTimelineTweetsDocument, options);
+      }
+export function useGetTimelineTweetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>(GetTimelineTweetsDocument, options);
+        }
+export type GetTimelineTweetsQueryHookResult = ReturnType<typeof useGetTimelineTweetsQuery>;
+export type GetTimelineTweetsLazyQueryHookResult = ReturnType<typeof useGetTimelineTweetsLazyQuery>;
+export type GetTimelineTweetsQueryResult = Apollo.QueryResult<GetTimelineTweetsQuery, GetTimelineTweetsQueryVariables>;
