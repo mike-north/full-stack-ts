@@ -23,15 +23,32 @@ export type Favorite = {
   user: User;
 };
 
+export type FavoriteInput = {
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createFavorite: Favorite;
   createTweet: Tweet;
+  deleteFavorite: Favorite;
+};
+
+
+export type MutationCreateFavoriteArgs = {
+  favorite: FavoriteInput;
 };
 
 
 export type MutationCreateTweetArgs = {
   body: Scalars['String'];
   userId: Scalars['String'];
+};
+
+
+export type MutationDeleteFavoriteArgs = {
+  favorite: FavoriteInput;
 };
 
 export type Query = {
@@ -157,6 +174,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Favorite: ResolverTypeWrapper<Favorite>;
+  FavoriteInput: FavoriteInput;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
@@ -172,6 +190,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Favorite: Favorite;
+  FavoriteInput: FavoriteInput;
   Int: Scalars['Int'];
   Mutation: {};
   Query: {};
@@ -193,7 +212,9 @@ export type FavoriteResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createFavorite?: Resolver<ResolversTypes['Favorite'], ParentType, ContextType, RequireFields<MutationCreateFavoriteArgs, 'favorite'>>;
   createTweet?: Resolver<ResolversTypes['Tweet'], ParentType, ContextType, RequireFields<MutationCreateTweetArgs, 'body' | 'userId'>>;
+  deleteFavorite?: Resolver<ResolversTypes['Favorite'], ParentType, ContextType, RequireFields<MutationDeleteFavoriteArgs, 'favorite'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
