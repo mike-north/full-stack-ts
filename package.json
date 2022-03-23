@@ -18,7 +18,7 @@
     "codegen": "concurrently yarn:codegen-* -c cyan,magenta",
     "build": "concurrently yarn:build-* -c cyan,magenta,yellow",
     "test": "concurrently yarn:test-* -c cyan,magenta,yellow",
-    "start": "cd server && yarn dev"
+    "dev": "cd server && yarn dev"
   },
   "workspaces": [
     "client",
