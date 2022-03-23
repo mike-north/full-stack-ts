@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ClientUserStatistics, ClientUser } from './client-types';
 import CurrentUserSummary from './CurrentUserSummary';
 
- interface DetailedUser extends ClientUser {
+interface DetailedUser extends ClientUser {
   coverUrl?: string | null;
   stats?: ClientUserStatistics | null;
 }

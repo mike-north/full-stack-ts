@@ -16,7 +16,7 @@ async function main() {
   );
   watchClientBuild();
   const db = new Db(DB_FILE_PATH);
-  await db.initDefaults()
+  await db.initDefaults();
   await seedDb(db);
 
   app.use('/static', express.static(STATIC_ROOT_FOLDER_PATH));

@@ -21,8 +21,8 @@ const ErrorFallback: React.ComponentType<FallbackProps> = ({
 declare global {
   interface NodeModule {
     hot: {
-      accept(cb?: () => void): void
-    }
+      accept(cb?: () => void): void;
+    };
   }
 }
 
