@@ -5,7 +5,7 @@
   "license": "NOLICENSE",
   "private": true,
   "scripts": {
-    "dev": "yarn parcel src/index.html",
+    "dev": "yarn parcel src/index.html --no-cache",
     "test": "echo 'no client-side tests yet'",
     "type-check": "tsc -p .",
     "build": "yarn parcel build  --dist-dir dist src/index.html",
