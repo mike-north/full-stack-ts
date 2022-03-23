@@ -4,6 +4,7 @@ import * as React from 'react';
 import { ClientHashtagTrend, ClientTrend } from './client-types';
 import { integerWithCommas } from './utils/number';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isHashtagTrend(arg: any): arg is ClientHashtagTrend {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return typeof arg.hashtag === 'string';

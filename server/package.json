@@ -42,6 +42,9 @@
     "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
   },
+  "engines": {
+    "node": ">=14.19.1"
+  },
   "volta": {
     "node": "14.19.1",
     "yarn": "1.22.18"
