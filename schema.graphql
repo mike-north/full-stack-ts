@@ -14,6 +14,7 @@ type User {
   avatarUrl: String!
   createdAt: String!
   updatedAt: String!
+  favorites: [Favorite!]
   stats: UserStats
 }
 type UserStats {
@@ -21,6 +22,15 @@ type UserStats {
   followingCount: Int!
   followerCount: Int!
 }
+
+type Favorite {
+  id: String!
+  tweet: Tweet!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
+}
+
 type Suggestion {
   name: String!
   handle: String!
