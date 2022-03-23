@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "build": "tsc -p .",
+    "test": "echo 'no server-side tests yet'",
     "codegen": "yarn graphql-codegen",
     "dev": "yarn concurrently 'yarn nodemon' 'tsc --watch --preserveWatchOutput' -n node,ts -c green.bgBlack,white.bgBlue"
   },
