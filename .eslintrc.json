@@ -54,6 +54,22 @@
       }
     },
     {
+      "files": "server/**/*.generated.ts",
+      "extends": ["plugin:node/recommended"],
+      "parserOptions": {
+        "project": "./server/tsconfig.json"
+      },
+      "env": { "node": true },
+      "rules": {
+        "node/no-unsupported-features/es-syntax": [
+          "error",
+          { "ignores": ["modules"] }
+        ],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-types": "off"
+      }
+    },
+    {
       "files": "shared/**/*.ts",
       "parserOptions": {
         "project": "./shared/tsconfig.json"
