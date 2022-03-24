@@ -25,8 +25,8 @@ async function main() {
     app.listen(PORT, () => {
       console.log(
         [
-          chalk.bgMagentaBright.black.bold(' API listening on   '),
-          chalk.bgWhite.black(`\thttp://localhost:${PORT}`),
+          chalk.bgMagentaBright.black.bold(' GraphQL API listening on   '),
+          chalk.bgWhite.black(`\thttp://localhost:${PORT}${''}\t`),
         ].join(' ')
       );
       resolve();
