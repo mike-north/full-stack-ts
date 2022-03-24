@@ -14,15 +14,41 @@ export type Scalars = {
   Float: number;
 };
 
+export type Favorite = {
+  __typename?: 'Favorite';
+  createdAt: Scalars['String'];
+  id: Scalars['String'];
+  tweet: Tweet;
+  updatedAt: Scalars['String'];
+  user: User;
+};
+
+export type FavoriteInput = {
+  tweetId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createFavorite: Favorite;
   createTweet: Tweet;
+  deleteFavorite: Favorite;
+};
+
+
+export type MutationCreateFavoriteArgs = {
+  favorite: FavoriteInput;
 };
 
 
 export type MutationCreateTweetArgs = {
   body: Scalars['String'];
   userId: Scalars['String'];
+};
+
+
+export type MutationDeleteFavoriteArgs = {
+  favorite: FavoriteInput;
 };
 
 export type Query = {
@@ -62,6 +88,7 @@ export type User = {
   avatarUrl: Scalars['String'];
   coverUrl: Scalars['String'];
   createdAt: Scalars['String'];
+  favorites?: Maybe<Array<Favorite>>;
   handle: Scalars['String'];
   id: Scalars['String'];
   name: Scalars['String'];
@@ -146,6 +173,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Favorite: ResolverTypeWrapper<Favorite>;
+  FavoriteInput: FavoriteInput;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
@@ -160,6 +189,8 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  Favorite: Favorite;
+  FavoriteInput: FavoriteInput;
   Int: Scalars['Int'];
   Mutation: {};
   Query: {};
@@ -171,8 +202,19 @@ export type ResolversParentTypes = {
   UserStats: UserStats;
 };
 
+export type FavoriteResolvers<ContextType = any, ParentType extends ResolversParentTypes['Favorite'] = ResolversParentTypes['Favorite']> = {
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  tweet?: Resolver<ResolversTypes['Tweet'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createFavorite?: Resolver<ResolversTypes['Favorite'], ParentType, ContextType, RequireFields<MutationCreateFavoriteArgs, 'favorite'>>;
   createTweet?: Resolver<ResolversTypes['Tweet'], ParentType, ContextType, RequireFields<MutationCreateTweetArgs, 'body' | 'userId'>>;
+  deleteFavorite?: Resolver<ResolversTypes['Favorite'], ParentType, ContextType, RequireFields<MutationDeleteFavoriteArgs, 'favorite'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -210,6 +252,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   avatarUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   coverUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  favorites?: Resolver<Maybe<Array<ResolversTypes['Favorite']>>, ParentType, ContextType>;
   handle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -226,6 +269,7 @@ export type UserStatsResolvers<ContextType = any, ParentType extends ResolversPa
 };
 
 export type Resolvers<ContextType = any> = {
+  Favorite?: FavoriteResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Suggestion?: SuggestionResolvers<ContextType>;

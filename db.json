@@ -120,13 +120,6 @@
   ],
   "favorites": [
     {
-      "userId": "user-15a37948-7712-4e0b-a554-2fef33f31697",
-      "tweetId": "tweet-1220baa2-2092-4ed8-a72c-91757dc508f7",
-      "createdAt": "2022-03-23T03:55:59.614Z",
-      "updatedAt": "2022-03-23T03:55:59.614Z",
-      "id": "favorite-9316e670-8b51-455c-90a9-ce42f20f4b62"
-    },
-    {
       "userId": "user-16ee50d0-e43c-4e95-8ae7-b02d086785f5",
       "tweetId": "tweet-0db3e976-92cc-4846-9b96-e2a03da0b4e2",
       "createdAt": "2022-03-23T03:55:59.615Z",
@@ -181,6 +174,34 @@
       "createdAt": "2022-03-23T03:55:59.617Z",
       "updatedAt": "2022-03-23T03:55:59.617Z",
       "id": "favorite-a4e781ad-1c7b-4e62-b9dd-66b4e36e390b"
+    },
+    {
+      "userId": "user-15a37948-7712-4e0b-a554-2fef33f31697",
+      "tweetId": "tweet-1dff3772-463a-469c-9425-4f50bc76460e",
+      "createdAt": "2022-03-24T20:31:21.704Z",
+      "updatedAt": "2022-03-24T20:31:21.704Z",
+      "id": "favorite-b3d1c2b9-cdd9-426b-866e-00729ba87e26"
+    },
+    {
+      "userId": "user-15a37948-7712-4e0b-a554-2fef33f31697",
+      "tweetId": "tweet-43d87239-4a18-4d01-81eb-88c187618861",
+      "createdAt": "2022-03-24T20:31:22.600Z",
+      "updatedAt": "2022-03-24T20:31:22.600Z",
+      "id": "favorite-960dd067-649d-4fd5-87e5-ec78cda8b059"
+    },
+    {
+      "userId": "user-15a37948-7712-4e0b-a554-2fef33f31697",
+      "tweetId": "tweet-1220baa2-2092-4ed8-a72c-91757dc508f7",
+      "createdAt": "2022-03-24T20:31:27.033Z",
+      "updatedAt": "2022-03-24T20:31:27.033Z",
+      "id": "favorite-a62d1b2a-9f9b-49de-95e9-7db56d9abab1"
+    },
+    {
+      "userId": "user-15a37948-7712-4e0b-a554-2fef33f31697",
+      "tweetId": "tweet-0db3e976-92cc-4846-9b96-e2a03da0b4e2",
+      "createdAt": "2022-03-24T20:32:08.436Z",
+      "updatedAt": "2022-03-24T20:32:08.436Z",
+      "id": "favorite-cfa202ca-f814-48ab-bd54-0283aeae89b5"
     }
   ],
   "hashtagTrends": [
@@ -193,28 +214,19 @@
   ],
   "topicTrends": [
     {
-      "topic": "Pointless Suggestions",
-      "tweetCount": 999,
-      "kind": "topic",
-      "id": "topictrend-73f3c816-b1fc-456d-8c45-beb9c657a663"
-    },
-    {
       "topic": "Frontend Masters",
       "tweetCount": 12345,
       "kind": "topic",
       "id": "topictrend-4f992d65-e229-48f2-b523-2faba1343f3e"
-    }
-  ],
-  "topicTrendQuotes": [
+    },
     {
       "topic": "Pointless Suggestions",
       "tweetCount": 999,
-      "title": "clippy",
-      "description": "It looks like you're trying to write a letter...",
-      "imageUrl": "http://localhost:3000/static/clippy-logo.jpeg",
-      "topicTrendId": "topictrend-73f3c816-b1fc-456d-8c45-beb9c657a663",
-      "id": "topictrendquote-d0e1ba0a-fa05-400a-9b94-7403b82ab0f4"
-    },
+      "kind": "topic",
+      "id": "topictrend-73f3c816-b1fc-456d-8c45-beb9c657a663"
+    }
+  ],
+  "topicTrendQuotes": [
     {
       "topic": "Frontend Masters",
       "tweetCount": 12345,
@@ -223,6 +235,15 @@
       "imageUrl": "http://localhost:3000/static/fem_logo.png",
       "topicTrendId": "topictrend-4f992d65-e229-48f2-b523-2faba1343f3e",
       "id": "topictrendquote-43d669bc-885b-4012-a4e6-653e38a6c521"
+    },
+    {
+      "topic": "Pointless Suggestions",
+      "tweetCount": 999,
+      "title": "clippy",
+      "description": "It looks like you're trying to write a letter...",
+      "imageUrl": "http://localhost:3000/static/clippy-logo.jpeg",
+      "topicTrendId": "topictrend-73f3c816-b1fc-456d-8c45-beb9c657a663",
+      "id": "topictrendquote-d0e1ba0a-fa05-400a-9b94-7403b82ab0f4"
     }
   ],
   "suggestions": [
