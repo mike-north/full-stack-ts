@@ -30,7 +30,7 @@
     "express": "^4.17.3",
     "graphql": "^15.0.0",
     "lowdb": "^1.0.0",
-    "pkg-up": "^3.0.0",
+    "pkg-up": "^4.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
