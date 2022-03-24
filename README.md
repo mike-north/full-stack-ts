@@ -1,9 +1,9 @@
-# Full Stack TypeScript
+# Full Stack TypeScript [![CI](https://github.com/mike-north/full-stack-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/mike-north/full-stack-ts/actions/workflows/ci.yml)
 
 Mike North's Full Stack TypeScript course
 
 - Video: [Frontend Masters](https://frontendmasters.com/workshops/fullstack-typescript/)
-- Course website: [https://www.typescript-training.com/course/full-stack-typescript](https://www.typescript-training.com/course/full-stack-typescript)
+- Course website: [TypeScript Training: Full Stack TypeScript](https://www.typescript-training.com/course/full-stack-typescript)
 
 ## Setup
 
