@@ -7,6 +7,7 @@
   "license": "NOLICENSE",
   "private": true,
   "scripts": {
+    "postinstall": "yarn build",
     "lint": "yarn eslint . --ext .ts,.js,.tsx,.jsx",
     "build-client": "cd client && yarn build",
     "build-server": "cd server && yarn build",
