@@ -1,17 +1,17 @@
-const queryTwitterResolver = {
-  currentUser: () => {
-    return {
-      id: '123',
-      name: 'John Doe',
-      handle: 'johndoe',
-      coverUrl: '',
-      avatarUrl: '',
-      createdAt: '',
-      updatedAt: '',
-    };
+import { TwitterResolverContext } from "../resolvers";
+import { QueryResolvers } from "../resolvers-types.generated";
+
+const queryTwitterResolver: QueryResolvers<TwitterResolverContext> = {
+  currentUser: (_, __, { db }) => {
+    const [firstUser] = db.getAllUsers();
+    if (!firstUser)
+      throw new Error(
+        'currentUser was requested, but there are no users in the database'
+      );
+    return firstUser;
   },
-  suggestions: () => {
-    return [];
+  suggestions: (_, __, { db }) => {
+    return db.getAllSuggestions();
   },
 };
 
