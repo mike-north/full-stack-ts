@@ -19,6 +19,7 @@ export type Query = {
   __typename?: 'Query';
   currentUser: User;
   suggestions: Array<Suggestion>;
+  tweets: Array<Tweet>;
 };
 
 export type Suggestion = {
@@ -29,6 +30,23 @@ export type Suggestion = {
   reason: Scalars['String'];
 };
 
+export type Tweet = {
+  __typename?: 'Tweet';
+  author?: Maybe<User>;
+  body: Scalars['String'];
+  createdAt: Scalars['String'];
+  id: Scalars['String'];
+  stats?: Maybe<TweetStats>;
+  updatedAt: Scalars['String'];
+};
+
+export type TweetStats = {
+  __typename?: 'TweetStats';
+  commentCount: Scalars['Int'];
+  favoriteCount: Scalars['Int'];
+  retweetCount: Scalars['Int'];
+};
+
 export type User = {
   __typename?: 'User';
   avatarUrl: Scalars['String'];
@@ -37,13 +55,21 @@ export type User = {
   handle: Scalars['String'];
   id: Scalars['String'];
   name: Scalars['String'];
+  stats?: Maybe<UserStats>;
   updatedAt: Scalars['String'];
+};
+
+export type UserStats = {
+  __typename?: 'UserStats';
+  followerCount: Scalars['Int'];
+  followingCount: Scalars['Int'];
+  tweetCount: Scalars['Int'];
 };
 
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string }, suggestions: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> };
+export type GetCurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'User', id: string, name: string, handle: string, avatarUrl: string, createdAt: string, stats?: { __typename?: 'UserStats', tweetCount: number, followerCount: number, followingCount: number } | null }, suggestions: Array<{ __typename?: 'Suggestion', name: string, handle: string, avatarUrl: string, reason: string }> };
 
 
 export const GetCurrentUserDocument = gql`
@@ -54,6 +80,11 @@ export const GetCurrentUserDocument = gql`
     handle
     avatarUrl
     createdAt
+    stats {
+      tweetCount
+      followerCount
+      followingCount
+    }
   }
   suggestions {
     name

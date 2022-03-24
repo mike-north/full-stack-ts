@@ -1,6 +1,7 @@
 type Query {
   currentUser: User!
   suggestions: [Suggestion!]!
+  tweets: [Tweet!]!
 }
 type User {
   id: String!
@@ -10,10 +11,29 @@ type User {
   avatarUrl: String!
   createdAt: String!
   updatedAt: String!
+  stats: UserStats
 }
 type Suggestion {
   name: String!
   handle: String!
   avatarUrl: String!
   reason: String!
+}
+type UserStats {
+  tweetCount: Int!
+  followingCount: Int!
+  followerCount: Int!
+}
+type Tweet {
+  id: String!
+  body: String!
+  createdAt: String!
+  updatedAt: String!
+  author: User
+  stats: TweetStats
+}
+type TweetStats {
+  favoriteCount: Int!
+  retweetCount: Int!
+  commentCount: Int!
 }
