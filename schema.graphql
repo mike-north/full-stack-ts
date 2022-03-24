@@ -1,0 +1,19 @@
+type Query {
+  currentUser: User!
+  suggestions: [Suggestion!]!
+}
+type User {
+  id: String!
+  name: String!
+  handle: String!
+  coverUrl: String!
+  avatarUrl: String!
+  createdAt: String!
+  updatedAt: String!
+}
+type Suggestion {
+  name: String!
+  handle: String!
+  avatarUrl: String!
+  reason: String!
+}
