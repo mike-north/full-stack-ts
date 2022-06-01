@@ -1861,10 +1861,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.41":
-  version "17.0.41"
-  resolved "https://registry.npmjs.org/@types/react/-/react-17.0.41.tgz"
-  integrity sha512-chYZ9ogWUodyC7VUTRBfblysKLjnohhFY9bGLwvnUFFy48+vB9DikmB3lW0qTFmBcKSzmdglcvkHK71IioOlDA==
+"@types/react@*", "@types/react@^18.0.10":
+  version "18.0.10"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.10.tgz#5692944d4a45e204fb7a981eb1388afe919cf4d0"
+  integrity sha512-dIugadZuIPrRzvIEevIu7A1smqOAjkSMv8qOfwPt9Ve6i6JT/FQcCHyk2qIAxwsQNKZt5/oGR0T4z9h2dXRAkg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -5883,13 +5883,12 @@ react-refresh@^0.9.0:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.9.0.tgz"
   integrity sha512-Gvzk7OZpiqKSkxsQvO/mbTN1poglhmAV7gR/DdIrRrSMXraRQQlfikRJOr3Nb9GTMPC5kof948Zy6jJZIFtDvQ==
 
-react@^17.0.2:
-  version "17.0.2"
-  resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
-  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+react@^18.1.0:
+  version "18.1.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.1.0.tgz#6f8620382decb17fdc5cc223a115e2adbf104890"
+  integrity sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ==
   dependencies:
     loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 readable-stream@^3.4.0:
   version "3.6.0"
