@@ -23,7 +23,7 @@
     "@full-stack-ts/shared": "^0.0.0",
     "add": "^2.0.6",
     "date-fns": "^2.28.0",
-    "graphql": "^15.0.0",
+    "graphql": "^16.6.0",
     "graphql-tag": "^2.0.0",
     "react-error-boundary": "^3.1.4",
     "yarn": "^1.22.18"
