@@ -21,7 +21,7 @@
     "@graphql-tools/graphql-file-loader": "^6.0.0",
     "@graphql-tools/load": "^6.0.0",
     "@graphql-tools/merge": "^6.0.0",
-    "@graphql-tools/schema": "^8.3.3",
+    "@graphql-tools/schema": "^9.0.9",
     "apollo-server": "^3.6.4",
     "apollo-server-core": "^3.6.5",
     "apollo-server-express": "^3.6.5",
