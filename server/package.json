@@ -18,7 +18,7 @@
     "@full-stack-ts/shared": "*",
     "@graphql-codegen/typescript": "^2.4.8",
     "@graphql-codegen/typescript-resolvers": "^2.6.1",
-    "@graphql-tools/graphql-file-loader": "^6.0.0",
+    "@graphql-tools/graphql-file-loader": "^7.5.16",
     "@graphql-tools/load": "^6.0.0",
     "@graphql-tools/merge": "^6.0.0",
     "@graphql-tools/schema": "^8.3.3",
